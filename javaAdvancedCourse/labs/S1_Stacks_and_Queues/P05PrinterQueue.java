@@ -16,8 +16,8 @@ public class P05PrinterQueue {
                 queue.offer(input);
             } else {
                 if (queue.size() > 0) {
-                    String printToBeCancelled = queue.poll();
-                    System.out.println("Canceled " + printToBeCancelled);
+                    String printToBeCanceled = queue.poll();
+                    System.out.println("Canceled " + printToBeCanceled);
                 } else {
                     System.out.println("Printer is on standby");
                 }
