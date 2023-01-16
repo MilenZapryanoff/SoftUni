@@ -25,9 +25,6 @@ public class P03DecimalToBinary {
             currentDigit = currentDigit / 2;
         }
 
-        for (int i = 0; i < stack.size(); i++) {
-            System.out.print(stack.pop());
-            i--;
-        }
+        stack.forEach(System.out::print);
     }
 }
