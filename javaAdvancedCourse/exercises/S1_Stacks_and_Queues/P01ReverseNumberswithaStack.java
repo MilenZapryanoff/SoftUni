@@ -13,10 +13,10 @@ public class P01ReverseNumberswithaStack {
 
         for (int i = 0; i < inputArr.length; i++) {
             String currentDigit = inputArr[i];
-            stack.addFirst(currentDigit);
+            stack.push(currentDigit);
         }
 
-        for (String s : inputArr) {
+        for (String s : stack) {
             System.out.print(stack.pop() + " ");
         }
 
