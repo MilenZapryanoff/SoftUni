@@ -12,30 +12,30 @@ public class P04BasicQueueOperations {
         int digitsToPop = scanner.nextInt();
         int digitToCheck = scanner.nextInt();
 
-        ArrayDeque<Integer> stack = new ArrayDeque<>();
+        ArrayDeque<Integer> queue = new ArrayDeque<>();
 
         for (int i = 0; i < digitsToPush; i++) {
 
             Integer currentDigitToPop = scanner.nextInt();
-            stack.offer(currentDigitToPop);
+            queue.offer(currentDigitToPop);
         }
         for (int i = 0; i < digitsToPop; i++) {
-            stack.poll();
+            queue.poll();
         }
 
-        if (!stack.isEmpty()) {
-            if (stack.contains(digitToCheck)) {
+        if (!queue.isEmpty()) {
+            if (queue.contains(digitToCheck)) {
                 System.out.println("true");
             } else {
 //                int smallestNum = Integer.MAX_VALUE;
-//                for (Integer element : stack) {
+//                for (Integer element : queue) {
 //                    int currentNum = element;
 //                    if (currentNum < smallestNum) {
 //                        smallestNum = currentNum;
 //                    }
 //                }
 //                System.out.println(smallestNum);
-                System.out.println(Collections.min(stack));
+                System.out.println(Collections.min(queue));
             }
         } else {
             System.out.println(0);
