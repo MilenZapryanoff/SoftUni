@@ -25,14 +25,7 @@ public class P02BasicStackOperations {
             if (stack.contains(digitToCheck)) {
                 System.out.println("true");
             } else {
-                int smallestNum = Integer.MAX_VALUE;
-                for (Integer element : stack) {
-                    int currentNum = element;
-                    if (currentNum < smallestNum) {
-                        smallestNum = currentNum;
-                    }
-                }
-                System.out.println(smallestNum);
+                System.out.println(Collections.min(stack));
             }
         } else {
             System.out.println(0);
