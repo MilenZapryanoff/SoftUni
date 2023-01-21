@@ -16,6 +16,7 @@ public class P06PrintDiagonalsofSquareMatrix {
                 matrix[i][j] = rowInput[j];
             }
         }
+        //print direction \
         for (int i = 0; i < dimensions; i++) {
             for (int j = i; j < i + 1; j++) {
                 System.out.print(matrix[i][j] + " ");
@@ -23,6 +24,7 @@ public class P06PrintDiagonalsofSquareMatrix {
         }
         System.out.println();
 
+        //print direction /
         int sequence = 0;
         for (int i = dimensions - 1; i >= 0; i--) {
             for (int j = 0; j < 1; j++) {

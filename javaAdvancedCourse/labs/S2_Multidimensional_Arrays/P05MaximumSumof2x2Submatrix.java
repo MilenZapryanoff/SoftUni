@@ -43,7 +43,6 @@ public class P05MaximumSumof2x2Submatrix {
             }
             System.out.println();
         }
-
         System.out.println(sum);
     }
 }
