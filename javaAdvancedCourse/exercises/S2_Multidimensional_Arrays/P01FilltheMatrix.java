@@ -13,32 +13,46 @@ public class P01FilltheMatrix {
         String[][] matrix = new String[dimensions][dimensions];
 
         if (pattern.equals("A")) {
-            int currentNum = 1;
-            for (int i = 0; i < dimensions; i++) {
+            patternA(dimensions, matrix);
+        } else {
+            patternB(dimensions, matrix);
+        }
+        printMatrix(dimensions, matrix);
+    }
+
+    public static void patternA(int dimensions, String[][] matrix) {
+
+        int currentNum = 1;
+        for (int i = 0; i < dimensions; i++) {
+            for (int j = 0; j < dimensions; j++) {
+                matrix[j][i] = String.valueOf(currentNum);
+                currentNum++;
+            }
+        }
+    }
+
+    public static void patternB(int dimensions, String[][] matrix) {
+
+        int currentNum = 1;
+
+        for (int i = 0; i < dimensions; i++) {
+
+            if (i % 2 == 0) {
                 for (int j = 0; j < dimensions; j++) {
                     matrix[j][i] = String.valueOf(currentNum);
                     currentNum++;
                 }
-            }
-        } else if (pattern.equals("B")) {
-
-            int currentNum = 1;
-
-            for (int i = 0; i < dimensions; i++) {
-
-                if (i % 2 == 0) {
-                    for (int j = 0; j < dimensions; j++) {
-                        matrix[j][i] = String.valueOf(currentNum);
-                        currentNum++;
-                    }
-                } else {
-                    for (int j = dimensions - 1; j >= 0; j--) {
-                        matrix[j][i] = String.valueOf(currentNum);
-                        currentNum++;
-                    }
+            } else {
+                for (int j = dimensions - 1; j >= 0; j--) {
+                    matrix[j][i] = String.valueOf(currentNum);
+                    currentNum++;
                 }
             }
         }
+
+    }
+
+    public static void printMatrix(int dimensions, String[][] matrix) {
         for (int i = 0; i < dimensions; i++) {
             for (int j = 0; j < dimensions; j++) {
                 System.out.print(matrix[i][j] + " ");
