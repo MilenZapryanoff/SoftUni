@@ -1,8 +1,6 @@
 package S4_Streams_Files_and_Directories;
 
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
