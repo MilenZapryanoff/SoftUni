@@ -1,9 +1,9 @@
 package S4_Streams_Files_and_Directories;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -47,10 +47,14 @@ public class P06WordCount {
             }
 
         }
-        //принт
-        for (Map.Entry<String, Integer> entry : countWords.entrySet()) {
-            System.out.println(entry.getKey() + " : " + entry.getValue());
-        }
+        //създаване на printWriter за да формираме нов файл
+        PrintWriter printWriter = new PrintWriter("C:\\Users\\Milen\\IdeaProjects\\Java-Advances_EXERCISES\\04. Java-Advanced-Files-and-Streams-Exercises-Resources\\result.txt");
+
+        //сортиране на масива по value, обхождане и писане във файл.
+        countWords.entrySet().stream()
+                .sorted((e1, e2) -> e2.getValue().compareTo(e1.getValue()))
+                .forEach(entry -> printWriter.println(entry.getKey() + " - " + entry.getValue()));
+        printWriter.close();
     }
 }
 
