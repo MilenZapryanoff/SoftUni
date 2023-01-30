@@ -3,7 +3,7 @@ package S4_Streams_Files_and_Directories;
 import java.io.*;
 
 public class P07MergeTwoFiles {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
 
         String inputFileOne = "C:\\Users\\Milen\\IdeaProjects\\Java-Advances_EXERCISES\\04. Java-Advanced-Files-and-Streams-Exercises-Resources\\inputOne.txt";
@@ -26,12 +26,6 @@ public class P07MergeTwoFiles {
                 outputStream.write(currentByte);
                 currentByte = inputStreamTwo.read();
             }
-
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
         }
-
-
     }
 }
