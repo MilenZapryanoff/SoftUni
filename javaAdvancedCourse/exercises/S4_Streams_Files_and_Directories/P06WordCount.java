@@ -34,8 +34,8 @@ public class P06WordCount {
         //обхождане на листа и прочитане на редовете
         for (int i = 0; i < allLinesWithText.size(); i++) {
             String line = allLinesWithText.get(i);
-            //създаване на масив с димите от редовете
-            String[] currentLine = line.split("\\s+");
+            //създаване на масив с думите от редовете, като премахване препинателните знаци
+            String[] currentLine = line.replaceAll("[,.!?]", "").split("\\s+");
             //обхождане на масива и match-ване с map-a
             for (int j = 0; j < currentLine.length; j++) {
                 String currentWord = currentLine[j];
