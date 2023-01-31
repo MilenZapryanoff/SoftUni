@@ -17,11 +17,17 @@ public class P02SumNumbers {
                 .map(elem -> parse.apply(elem))
                 .collect(Collectors.toList());
 
-        int sum = 0;
-        for (int i = 0; i < numberList.size(); i++) {
-            int currentNum = numberList.get(i);
-            sum += currentNum;
-        }
+        int sum = numberList
+                .stream()
+                .mapToInt(a -> a)
+                .sum();
+
+//        int sum = 0;
+//        for (int i = 0; i < numberList.size(); i++) {
+//            int currentNum = numberList.get(i);
+//            sum += currentNum;
+//        }
+
         System.out.printf("Count = %d%n", numberList.size());
         System.out.printf("Sum = %d%n", sum);
     }
