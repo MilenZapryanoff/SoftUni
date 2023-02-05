@@ -14,8 +14,7 @@ public class P06FindEvensorOdds {
         String oddOrEven = scanner.nextLine();
 
         Predicate<Integer> filterCondition = oddOrEven.equals("odd") ?
-                (x -> x % 2 != 0) :
-                (x -> x % 2 == 0);
+                (x -> x % 2 != 0) :  (x -> x % 2 == 0);
 
         IntStream.range(lowerBound, upperBound + 1)
                 .filter(num -> filterCondition.test(num))
