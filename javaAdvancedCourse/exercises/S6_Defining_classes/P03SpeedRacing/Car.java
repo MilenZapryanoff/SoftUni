@@ -3,18 +3,18 @@ package S6_Defining_classes.P03SpeedRacing;
 public class Car {
     private String model;
     private double fuelAmount;
-    private double priceFuelPerKm;
+    private double consumptionFuelPerKm;
     private int distanceTraveled;
 
     public Car(String model, double fuelAmount, double priceFuelPerKm) {
         this.model = model;
         this.fuelAmount = fuelAmount;
-        this.priceFuelPerKm = priceFuelPerKm;
+        this.consumptionFuelPerKm = priceFuelPerKm;
         this.distanceTraveled = 0;
     }
 
     public boolean drive(int kmDrive) {
-        double needFuel = kmDrive * this.priceFuelPerKm;
+        double needFuel = kmDrive * this.consumptionFuelPerKm;
         if (needFuel <= this.fuelAmount) {
             this.fuelAmount -= needFuel;
             this.distanceTraveled += kmDrive;
