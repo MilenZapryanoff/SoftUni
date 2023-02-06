@@ -15,9 +15,9 @@ public class main {
             String[] data = scanner.nextLine().split("\\s+");
             String model = data[0];
             int fuelAmount = Integer.parseInt(data[1]);;
-            double priceFuelPerKm = Double.parseDouble(data[2]);
+            double fuelConsumptionPerKm = Double.parseDouble(data[2]);
 
-            Car car = new Car(model, fuelAmount, priceFuelPerKm);
+            Car car = new Car(model, fuelAmount, fuelConsumptionPerKm);
             cars.put(model, car);
 
         }
