@@ -9,6 +9,7 @@ public class Trainer {
     private List<Pokemon> collectionOfPokemon;
 
     public Trainer(String name, List<Pokemon> collectionOfPokemon) {
+		
         this.name = name;
         this.numberOfBadges = 0;
         this.collectionOfPokemon = collectionOfPokemon;
