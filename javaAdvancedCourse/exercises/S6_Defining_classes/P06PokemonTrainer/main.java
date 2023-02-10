@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 public class main {
     public static void main(String[] args) {
+		
         Scanner scanner = new Scanner(System.in);
 
         Map<String, List<Pokemon>> pokemonsByTrainer = new LinkedHashMap<>();
