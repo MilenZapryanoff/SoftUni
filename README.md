@@ -15,4 +15,4 @@ CERTIFICATES:
   
   
   
-<p>&nbsp;<img align="left" src="https://github-readme-stats.vercel.app/api?username=MilenZapryanoff&show_icons=true&locale=en" alt="PePetrov96" /></p>
+<p>&nbsp;<img align="left" src="https://github-readme-stats.vercel.app/api?username=MilenZapryanoff&show_icons=true&locale=en" alt="MilenZapryanoff" /></p>
