@@ -3,6 +3,22 @@ The repository contains solutions to problems during my javaLearningProgramme at
 Solutions of problems are sorted by courses according to the learning programme.
 
 
+The program contains the following modules : 
+
+- Programming Basics
+- Program,ming Fundamentals
+- Java Advanced
+  + Java Advanced
+  + Java OOP
+- Java DB
+  + MYSQL
+  + SPRING Data
+- Java Web
+  + SPRING Fundamentals
+  + Spring Advanced
+- JS Front-end
+  + JS Front-end
+  + HTML & CSS
 
 
 CERTIFICATES:
@@ -15,4 +31,3 @@ CERTIFICATES:
   
   
   
-<p>&nbsp;<img align="left" src="https://github-readme-stats.vercel.app/api?username=MilenZapryanoff&show_icons=true&locale=en" alt="MilenZapryanoff" /></p>
