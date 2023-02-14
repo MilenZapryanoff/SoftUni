@@ -1,4 +1,4 @@
-package christmas;
+package Exam_preparation.P03Christmas;
 
 import java.util.ArrayList;
 import java.util.List;
