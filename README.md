@@ -12,9 +12,9 @@ The program contains the following modules :
   + Java OOP
 - Java DB
   + MYSQL
-  + SPRING Data
+  + Spring Data
 - Java Web
-  + SPRING Fundamentals
+  + Spring Fundamentals
   + Spring Advanced
 - JS Front-end
   + JS Front-end
