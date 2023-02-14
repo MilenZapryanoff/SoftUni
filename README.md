@@ -1,6 +1,6 @@
 # SoftUni
-The repository contains solutions to problems during my javaLearningProgramme at SoftUni.
-Solutions of problems are sorted by courses according to the learning programme.
+The repository contains solutions to problems during my javaLearningProgram at SoftUni.
+Solutions of problems are sorted by courses according to the learning program.
 
 
 The program contains the following modules : 
