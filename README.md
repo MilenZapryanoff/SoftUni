@@ -12,3 +12,7 @@ CERTIFICATES:
   Programming Basics [certificate](https://softuni.bg/certificates/details/140089/040083a4)
   
   Programming Fundamentals [certificate](https://softuni.bg/certificates/details/148552/7e09709b)
+  
+  
+  
+  [![Anurag's GitHub stats](https://github-readme-stats.vercel.app/apiMilenZapryanoffanuraghazra)](https://github.com/anuraghazra/github-readme-stats)
