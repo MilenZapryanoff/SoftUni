@@ -44,25 +44,30 @@ public class P02TreasureHunt {
         String command = scanner.nextLine();
         while (!command.equals("Finish")) {
 
+            //започваме да обработваме командите за посоки
             if (command.equals("up")) {
                 int nextRow = positionRow - 1;
                 if (nextRow >= 0 && !map[nextRow][positionCol].equals("T")) {
-                    positionRow = nextRow; path.add(command);
+                    positionRow = nextRow;
+                    path.add(command);
                 }
             } else if (command.equals("down")) {
                 int nextRow = positionRow + 1;
                 if (nextRow < map.length && !map[nextRow][positionCol].equals("T")) {
-                    positionRow = nextRow; path.add(command);
+                    positionRow = nextRow;
+                    path.add(command);
                 }
             } else if (command.equals("left")) {
                 int nextCol = positionCol - 1;
                 if (nextCol >= 0 && !map[positionRow][nextCol].equals("T")) {
-                    positionCol = nextCol; path.add(command);
+                    positionCol = nextCol;
+                    path.add(command);
                 }
             } else if (command.equals("right")) {
                 int nextCol = positionCol + 1;
                 if (nextCol < map[positionRow].length && !map[positionRow][nextCol].equals("T")) {
-                    positionCol = nextCol; path.add(command);
+                    positionCol = nextCol;
+                    path.add(command);
                 }
             }
             command = scanner.nextLine();
