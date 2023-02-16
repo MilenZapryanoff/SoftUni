@@ -1,14 +1,23 @@
 # SoftUni
-The repository contains solutions to problems during my javaLearningProgramme at SoftUni.
-Solutions of problems are sorted by courses according to the learning programme.
+The repository contains solutions to problems during my javaLearningProgram at SoftUni.
+The solutions are sorted by courses according to the learning program.
 
 
+The program contains the following modules : 
 
-
-CERTIFICATES:
-
-  QA Basics [certificate](https://softuni.bg/certificates/details/154179/702bd4b4)
-
-  Programming Basics [certificate](https://softuni.bg/certificates/details/140089/040083a4)
+- Programming Basics [certificate](https://softuni.bg/certificates/details/140089/040083a4)
+- Programming Fundamentals [certificate](https://softuni.bg/certificates/details/148552/7e09709b)
+- Java Advanced
+  + Java Advanced
+  + Java OOP
+- Java DB
+  + MYSQL
+  + Spring Data
+- Java Web
+  + Spring Fundamentals
+  + Spring Advanced
+- JS Front-end
+  + JS Front-end
+  + HTML & CSS
+ 
   
-  Programming Fundamentals [certificate](https://softuni.bg/certificates/details/148552/7e09709b)
