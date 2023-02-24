@@ -8,7 +8,7 @@ The program contains the following modules :
 - Programming Basics [certificate](https://softuni.bg/certificates/details/140089/040083a4)
 - Programming Fundamentals [certificate](https://softuni.bg/certificates/details/148552/7e09709b)
 - Java Advanced
-  + Java Advanced
+  + Java Advanced [certificate](https://softuni.bg/certificates/details/161720/18fd6d44)
   + Java OOP
 - Java DB
   + MYSQL
