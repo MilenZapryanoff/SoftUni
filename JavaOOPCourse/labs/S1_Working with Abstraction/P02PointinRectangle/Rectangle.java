@@ -1,4 +1,4 @@
-package S1_Working_with_Abstraction.P02PointinRectangle;
+package S1_Working_with_Abstraction.P02PointInRectangle;
 
 public class Rectangle {
     private Point bottomLeft;
