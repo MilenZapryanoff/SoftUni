@@ -11,7 +11,6 @@ public class Main {
 
     }
 
-
     enum CardRanks {
         ACE,
         TWO,
