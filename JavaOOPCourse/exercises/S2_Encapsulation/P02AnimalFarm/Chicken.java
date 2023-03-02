@@ -43,6 +43,6 @@ public class Chicken {
 
     @Override
     public String toString() {
-       return String.format("%s (age %d)", this.name, this.age);
+       return String.format("Chicken %s (age %d) can produce %.2f eggs per day.", this.name, this.age, this.productPerDay() );
     }
 }
