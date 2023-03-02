@@ -10,7 +10,6 @@ public class Main {
         int age = Integer.parseInt(scanner.nextLine());
 
         Chicken chicken = new Chicken(name, age);
-
-        System.out.printf("Chicken %s can produce %.2f eggs per day.", chicken.toString(), chicken.productPerDay() );
+        System.out.printf(chicken.toString());
     }
 }
