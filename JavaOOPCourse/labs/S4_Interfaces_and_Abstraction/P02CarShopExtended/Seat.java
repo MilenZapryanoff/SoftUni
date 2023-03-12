@@ -11,8 +11,11 @@ public class Seat extends CarImpl implements Sellable {
 
     @Override
     public String toString() {
-        return String.format("This is %s produced in %s and have %d tires%n%s sells for %f",
-                super.getModel(), super.getCountryProduced(),
-                Car.TYRES, super.getModel(), this.price);
+        return String.format("This is %s produced in %s and have %d tires%n%s sells for %f", super.getModel(), super.getCountryProduced(), Car.TYRES, super.getModel(), this.price);
+    }
+
+    @Override
+    public double getPrice() {
+        return this.price;
     }
 }
