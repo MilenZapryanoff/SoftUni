@@ -22,8 +22,6 @@ public class Audi extends CarImpl implements Rentable {
 
     @Override
     public String toString() {
-        return String.format("This is %s produced in %s and have %d tires%nMinimum rental period of %d days. Price per day %f",
-                super.getModel(), super.getCountryProduced(),
-                Car.TYRES, this.minRentDay, this.pricePerDay);
+        return String.format("This is %s produced in %s and have %d tires%nMinimum rental period of %d days. Price per day %f", super.getModel(), super.getCountryProduced(), Car.TYRES, this.minRentDay, this.pricePerDay);
     }
 }
