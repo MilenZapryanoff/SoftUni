@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence
+             http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+             version="2.0">
+
+    <persistence-unit name="gringotts">
+        <description>Unit manages Task 1</description>
+        <class>Entity.WizardDeposit</class>
+        <class>Entity.BaseEntity</class>
+        <exclude-unlisted-classes>true</exclude-unlisted-classes>
+        <properties>
+            <property name="hibernate.connection.url"
+                      value="jdbc:mysql://localhost:3306/gringotts?createDatabaseIfNotExist=true&amp;allowPublicKeyRetrieval=TRUE&amp;useSSL=false&amp;serverTimezone=UTC"/>
+            <property name="hibernate.connection.driver_class" value="com.mysql.cj.jdbc.Driver"/>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+            <property name="hibernate.connection.username" value="root"/>
+            <property name="hibernate.connection.password" value="123456"/>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect"/>
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.format_sql" value="true"/>
+        </properties>
+    </persistence-unit>
+    <persistence-unit name="sales">
+        <description>Unit manages Task 2</description>
+        <class>Entity.sales.Customer</class>
+        <class>Entity.sales.Product</class>
+        <class>Entity.sales.Sale</class>
+        <class>Entity.sales.StoreLocation</class>
+        <class>Entity.BaseEntity</class>
+        <exclude-unlisted-classes>true</exclude-unlisted-classes>
+        <properties>
+            <property name="hibernate.connection.url"
+                      value="jdbc:mysql://localhost:3306/sales?createDatabaseIfNotExist=true&amp;allowPublicKeyRetrieval=TRUE&amp;useSSL=false&amp;serverTimezone=UTC"/>
+            <property name="hibernate.connection.driver_class" value="com.mysql.cj.jdbc.Driver"/>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+            <property name="hibernate.connection.username" value="root"/>
+            <property name="hibernate.connection.password" value="forever"/>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect"/>
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.format_sql" value="true"/>
+
+        </properties>
+
+    </persistence-unit>
+    <persistence-unit name="university">
+        <description>Unit manages Task 3</description>
+        <class>Entity.university.User</class>
+        <class>Entity.university.Course</class>
+        <class>Entity.university.Student</class>
+        <class>Entity.university.Teacher</class>
+        <class>Entity.BaseEntity</class>
+        <exclude-unlisted-classes>true</exclude-unlisted-classes>
+        <properties>
+            <property name="hibernate.connection.url"
+                      value="jdbc:mysql://localhost:3306/university?createDatabaseIfNotExist=true&amp;allowPublicKeyRetrieval=TRUE&amp;useSSL=false&amp;serverTimezone=UTC"/>
+            <property name="hibernate.connection.driver_class" value="com.mysql.cj.jdbc.Driver"/>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+            <property name="hibernate.connection.username" value="root"/>
+            <property name="hibernate.connection.password" value="forever"/>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect"/>
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.format_sql" value="true"/>
+
+        </properties>
+
+    </persistence-unit>
+    <persistence-unit name="hospital">
+        <description>Unit manages Task 4</description>
+        <class>Entity.hospital.Patient</class>
+        <class>Entity.hospital.Medicament</class>
+        <class>Entity.hospital.Diagnose</class>
+        <class>Entity.hospital.Visitation</class>
+        <class>Entity.BaseEntity</class>
+        <exclude-unlisted-classes>true</exclude-unlisted-classes>
+        <properties>
+            <property name="hibernate.connection.url"
+                      value="jdbc:mysql://localhost:3306/hospital?createDatabaseIfNotExist=true&amp;allowPublicKeyRetrieval=TRUE&amp;useSSL=false&amp;serverTimezone=UTC"/>
+            <property name="hibernate.connection.driver_class" value="com.mysql.cj.jdbc.Driver"/>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+            <property name="hibernate.connection.username" value="root"/>
+            <property name="hibernate.connection.password" value="forever"/>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect"/>
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.format_sql" value="true"/>
+
+        </properties>
+
+    </persistence-unit>
+    <persistence-unit name="bank">
+        <description>Unit manages Task 5</description>
+        <class>Entity.bank.BillingDetail</class>
+        <class>Entity.bank.BankAccount</class>
+        <class>Entity.bank.CardType</class>
+        <class>Entity.bank.CreditCard</class>
+        <class>Entity.bank.User</class>
+        <class>Entity.BaseEntity</class>
+        <exclude-unlisted-classes>true</exclude-unlisted-classes>
+
+        <properties>
+
+            <property name="hibernate.connection.url"
+                      value="jdbc:mysql://localhost:3306/bank?createDatabaseIfNotExist=true&amp;allowPublicKeyRetrieval=TRUE&amp;useSSL=false&amp;serverTimezone=UTC"/>
+            <property name="hibernate.connection.driver_class" value="com.mysql.cj.jdbc.Driver"/>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+            <property name="hibernate.connection.username" value="root"/>
+            <property name="hibernate.connection.password" value="forever"/>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect"/>
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.format_sql" value="true"/>
+
+        </properties>
+
+    </persistence-unit>
+
+
+</persistence>
