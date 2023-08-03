@@ -12,7 +12,7 @@ The program contains the following modules :
   + Java OOP [certificate](https://softuni.bg/certificates/details/168971/882c9827)
 - Java DB
   + MYSQL [certificate](https://softuni.bg/certificates/details/172257/52a4b645)
-  + Spring Data - ongoing course
+  + Spring Data - [certificate](https://softuni.bg/certificates/details/180573/80c84453)
 - Java Web
   + Spring Fundamentals
   + Spring Advanced
