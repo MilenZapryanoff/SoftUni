@@ -19,5 +19,5 @@ The program contains the following modules :
 - JS Front-end
   + JS Front-end
   + HTML & CSS
- 
+- Data Structures Fundamentals (with Java) - ongoing course
   
