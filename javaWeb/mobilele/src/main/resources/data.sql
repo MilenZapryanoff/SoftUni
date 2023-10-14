@@ -1,0 +1,2 @@
+INSERT INTO users (id, active, email, first_name, last_name, password)
+VALUES (2, 1, 'admin@example.com', 'Admin', 'Adminov', 'de89ecd09248331d70979d176917cc9076fc195064857b4492dc58cc352c20bfd24305e2c4cd138aa2ca00dbfcb93687');
