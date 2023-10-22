@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/commons::head}"></head>
+<body>
+<header th:replace="~{fragments/commons::nav}"></header>
+<main>
+
+    <div class="container bg-blur rounded mt-3 mb-4">
+        <h1>All words</h1>
+        <div class="row mt-3 mb-3">
+
+            <div class="col-5 bg-dark rounded m-auto" style="height: 30vh; overflow: auto">
+                <h3 th:text="'German: ' + ${words.germanWords.size()}" class="mySticky bg-gray text-dark rounded"></h3>
+                <div th:each="germanWords: ${words.germanWords}" class="mt-3 rounded badge-warning">
+                    <img th:text="${germanWords.getTerm()} + ': ' + ${germanWords.getTranslation()}" class="mr-2"
+                         src="/img/german.png" alt="Flag" width="20px" height="20px">
+                    <span></span>
+                    <br th:text="'Example: ' + ${germanWords.getExample()}">
+                    <span></span>
+                    <br th:text="'Added by: ' + ${germanWords.getAddedBy().getUsername()} + ' on ' +
+                        ${germanWords.getInputDate()}">
+                    <span></span>
+                    <form id="german" method="post" th:action="@{/words/remove/{id}(id=${germanWords.getId()})}"></form>
+                    <a class="ml-3 text-danger" onclick="document.getElementById('german').submit()" style="cursor: pointer;">Remove</a>
+                </div>
+            </div>
+
+            <div class="col-5 bg-dark rounded m-auto" style="height: 30vh; overflow: auto">
+                <h3 th:text="'Spanish: ' + ${words.spanishWords.size()}"
+                    class="mySticky bg-gray text-dark rounded"></h3>
+                <div th:each="spanishWords: ${words.spanishWords}" class="mt-3 rounded badge-secondary">
+                    <img th:text="${spanishWords.getTerm()} + ': ' + ${spanishWords.getTranslation()}" class="mr-2"
+                         src="/img/spanish.png" alt="Flag" width="20px" height="20px">
+                    <span></span>
+                    <br th:text="'Example: ' + ${spanishWords.getExample()}">
+                    <span></span>
+                    <br th:text="'Added by: ' + ${spanishWords.getAddedBy().getUsername()} + ' on ' +
+                        ${spanishWords.getInputDate()}">
+                    <span></span>
+                    <form id="spanish" method="post"
+                          th:action="@{/words/remove/{id}(id=${spanishWords.getId()})}"></form>
+                    <a class="ml-3 text-danger" onclick="document.getElementById('spanish').submit()" style="cursor: pointer;">Remove</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-3 mb-3">
+            <div class="col-5 bg-dark rounded m-auto" style="height: 30vh; overflow: auto">
+                <h3 th:text="'French: ' + ${words.frenchWords.size()}" class="mySticky bg-gray text-dark rounded"></h3>
+                <div th:each="frenchWords: ${words.frenchWords}" class="mt-3 rounded badge-info">
+                    <img th:text="${frenchWords.getTerm()} + ': ' + ${frenchWords.getTranslation()}" class="mr-2"
+                         src="/img/french.png" alt="Flag" width="20px" height="20px">
+                    <span></span>
+                    <br th:text="'Example: ' + ${frenchWords.getExample()}">
+                    <span></span>
+                    <br th:text="'Added by: ' + ${frenchWords.getAddedBy().getUsername()} + ' on ' +
+                        ${frenchWords.getInputDate()}">
+                    <span></span>
+                    <form id="french" method="post" th:action="@{/words/remove/{id}(id=${frenchWords.getId()})}"></form>
+                    <a class="ml-3 text-danger" onclick="document.getElementById('french').submit()" style="cursor: pointer;">Remove</a>
+                </div>
+            </div>
+
+            <div class="col-5 bg-dark rounded m-auto" style="height: 30vh; overflow: auto">
+                <h3 th:text="'Italian: ' + ${words.italianWords.size()}"
+                    class="mySticky bg-gray text-dark rounded"></h3>
+                <div th:each="italianWords: ${words.italianWords}" class="mt-3 rounded badge-success">
+                    <img th:text="${italianWords.getTerm()} + ': ' + ${italianWords.getTranslation()}" class="mr-2"
+                         src="/img/italian.png" alt="Flag" width="20px" height="20px">
+                    <span></span>
+                    <br th:text="'Example: ' + ${italianWords.getExample()}">
+                    <span></span>
+                    <br th:text="'Added by: ' + ${italianWords.getAddedBy().getUsername()} + ' on ' +
+                        ${italianWords.getInputDate()}">
+                    <span></span>
+                    <form id="italian" method="post" th:action="@{/words/remove/{id}(id=${italianWords.getId()})}"></form>
+                    <a class="ml-3 text-danger" onclick="document.getElementById('italian').submit() "style="cursor: pointer;">Remove</a>
+                </div>
+            </div>
+        </div>
+        <form id="removeAll" method="post" th:action="@{/words/remove-all}"></form>
+        <a class="btn btn-danger" onclick="document.getElementById('removeAll').submit();" style="cursor: pointer;"
+           th:text="'Remove all '+ ${@wordRepository.count()} + ' words'"></a>
+    </div>
+</main>
+<footer th:replace="~{fragments/commons::footer}"></footer>
+</body>
+</html>
