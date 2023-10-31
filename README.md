@@ -14,8 +14,8 @@ The program contains the following modules :
   + MYSQL [certificate](https://softuni.bg/certificates/details/172257/52a4b645)
   + Spring Data - [certificate](https://softuni.bg/certificates/details/180573/80c84453)
 - Java Web
-  + Spring Fundamentals - ongoing course
-  + Spring Advanced
+  + Spring Fundamentals - [certificate](https://softuni.bg/certificates/details/191553/6461ca2c)
+  + Spring Advanced - ongoing course
 - JS Front-end
   + JS Front-end
   + HTML & CSS
