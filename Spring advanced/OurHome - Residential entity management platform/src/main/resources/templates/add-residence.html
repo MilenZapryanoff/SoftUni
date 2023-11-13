@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang='en'
+      xmlns:th='http://www.thymeleaf.org'
+      xmlns:sec='http://www.thymeleaf.org/extras/spring-security'>
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+          rel="stylesheet">
+
+    <title>OurHome - Home management platform</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="/css/fontawesome.css">
+    <link rel="stylesheet" href="/css/our-home.css">
+    <link rel="stylesheet" href="/css/owl.css">
+    <link rel="stylesheet" href="/css/animate.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
+
+</head>
+
+<body>
+
+<!-- ***** Preloader Start ***** -->
+<div id="js-preloader" class="js-preloader">
+    <div class="preloader-inner">
+        <span class="dot"></span>
+        <div class="dots">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+</div>
+<!-- ***** Preloader End ***** -->
+
+<!-- ***** Header ***** -->
+<div th:replace="~{fragments/header}" class="sub-header">
+</div>
+
+<!-- ***** NavBar ***** -->
+<header class="header-area header-sticky">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav class="main-nav">
+                    <!-- ***** Logo Start ***** -->
+                    <a th:href="@{/}" class="logo">
+                        <h1>OurHome</h1>
+                    </a>
+                    <!-- ***** Logo End ***** -->
+                    <!-- ***** Menu Start ***** -->
+                    <ul class="nav">
+                        <li><a th:href="@{/}">Home</a></li>
+                        <li sec:authorize="isAuthenticated()"><a th:href="@{/messages}">Messages</a></li>
+                        <small sec:authorize="isAuthenticated()" th:with="userId=${userViewModel.getId()}">
+                            <samp th:if="${@messageRepository.countUnreadMessages(userId) > 0}"
+                                  th:with="userId=${userViewModel.getId()}"
+                                  class="timer count-title text-danger"
+                                  th:data-to="${@messageRepository.countUnreadMessages(userId)}"
+                                  data-speed="1000"></samp>
+                        </small>
+                        <li sec:authorize="hasRole('ADMIN')"><a th:href="@{/administration}" class="active">Administration</a>
+                        </li>
+                        <li sec:authorize="hasRole('MANAGER')"><a th:href="@{/administration }" class="active">Administration</a>
+                        </li>
+                        <li sec:authorize="hasRole('USER')"><a th:href="@{/property}">Your property</a></li>
+                        <li sec:authorize="hasRole('MODERATOR')"><a th:href="@{/property}">Your property</a></li>
+                        <li sec:authorize="isAuthenticated()"><a th:href="@{/profile}">Profile</a></li>
+                        <li><a th:href="@{/contact}">Contact Us</a></li>
+                        <li sec:authorize="!isAuthenticated()"><a th:href="@{/register}">Register</a></li>
+                        <form sec:authorize="isAuthenticated()" id="logout" th:action="@{/logout}" method="POST">
+                            <li><a onclick="logout.submit()" style="cursor: pointer;">Logout</a></li>
+                        </form>
+                        <li sec:authorize="!isAuthenticated()"><a th:href="@{/login}">Login</a></li>
+                    </ul>
+                    <a class='menu-trigger'>
+                        <span>Menu</span>
+                    </a>
+                    <!-- ***** Menu End ***** -->
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<!--Single property BANNER-->
+<div class="page-heading header-text">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="row">
+                    <div class="column-gap-2">
+                    </div>
+                </div>
+                <h3>
+                    Register now
+                </h3>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+
+<div align="center" class="input-content">
+    <div class="col-lg-4">
+        <form id="input-form"
+              th:method="POST"
+              th:action="@{/administration/add}"
+              th:object="${residentialEntityRegisterBindingModel}">
+            <div class="col-lg-12">
+                <fieldset>
+                    <label for="city"><b>City</b></label>
+                    <select class="form-control" id="city"
+                            th:field="*{city}">
+                        <option th:each="city : ${T(com.example.OurHome.model.Entity.enums.CityName).values()}"
+                                th:value="${city}"
+                                th:text="${city}">
+                        </option>
+                    </select>
+                    <small th:if="${#fields.hasErrors('city')}"
+                           th:errors="*{city}" class="text-danger">City error message</small>
+                    <fieldset>
+                        <label for="streetName"><b>Street Name</b></label>
+                        <br>
+                        <small th:if="${#fields.hasErrors('streetName')}"
+                               th:errors="*{streetName}" class="text-danger">Street name error message</small>
+                        <input type="text" id="streetName" placeholder="Enter your last Name..." autocomplete="on"
+                               required
+                               th:field="*{streetName}"
+                               th:errorclass="bg-danger">
+                    </fieldset>
+                    <fieldset>
+                        <label for="streetNumber"><b>Street №</b></label>
+                        <br>
+                        <small th:if="${#fields.hasErrors('streetNumber')}"
+                               th:errors="*{streetNumber}" class="text-danger">Street number error message</small>
+                        <!--                    <small th:if="${duplicatedUser}" class="text-danger">User already exists!</small>-->
+                        <input type="text" id="streetNumber" placeholder="Enter street №..." autocomplete="on" required
+                               th:field="*{streetNumber}"
+                               th:errorclass="bg-danger">
+                    </fieldset>
+                    <fieldset>
+                        <label for="entrance"><b>Entrance №</b></label>
+                        <br>
+                        <small th:if="${#fields.hasErrors('entrance')}"
+                               th:errors="*{entrance}" class="text-danger">Entrance error message</small>
+                        <!--                    <small th:if="${duplicatedEmail}" class="text-danger">Email already exists!</small>-->
+                        <input type="text" id="entrance" placeholder="Enter Entrance №..." th:field="*{entrance}"
+                               th:errorclass="bg-danger">
+                    </fieldset>
+                    <fieldset>
+                        <label for="numberOfApartments"><b>Number of apartments</b></label>
+                        <br>
+                        <small th:if="${#fields.hasErrors('numberOfApartments')}"
+                               th:errors="*{numberOfApartments}" class="text-danger">Number of apartments error
+                            message</small>
+                        <input type="text" id="numberOfApartments" placeholder="Enter number of apartments ..."
+                               required
+                               th:field="*{numberOfApartments}"
+                               th:errorclass="bg-danger">
+                    </fieldset>
+                    <fieldset>
+                        <button th:href="@{/administration}" type="submit" id="form-submit" class="orange-button">Submit
+                        </button>
+                    </fieldset>
+            </div>
+        </form>
+    </div>
+
+
+</div>
+
+<!-- Footer -->
+<footer th:replace="~{fragments/footer}">
+</footer>
+
+<!-- Scripts -->
+<!-- Bootstrap core JavaScript -->
+<script src="/jquery/jquery.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/isotope.min.js"></script>
+<script src="/js/owl-carousel.js"></script>
+<script src="/js/counter.js"></script>
+<script src="/js/custom.js"></script>
+
+</div>
+</body>
+</html>

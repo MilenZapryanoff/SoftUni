@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang='en'
+      xmlns:th='http://www.thymeleaf.org'
+      xmlns:sec='http://www.thymeleaf.org/extras/spring-security'>
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+          rel="stylesheet">
+
+    <title>OurHome - Home management platform</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="/css/fontawesome.css">
+    <link rel="stylesheet" href="/css/our-home.css">
+    <link rel="stylesheet" href="/css/owl.css">
+    <link rel="stylesheet" href="/css/animate.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
+
+</head>
+
+<body>
+
+<!-- ***** Preloader Start ***** -->
+<div id="js-preloader" class="js-preloader">
+    <div class="preloader-inner">
+        <span class="dot"></span>
+        <div class="dots">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+</div>
+<!-- ***** Preloader End ***** -->
+
+<!-- ***** Header ***** -->
+<div th:replace="~{fragments/header}" class="sub-header">
+</div>
+
+<!-- ***** NavBar ***** -->
+<header class="header-area header-sticky">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav class="main-nav">
+                    <!-- ***** Logo Start ***** -->
+                    <a th:href="@{/}" class="logo">
+                        <h1>OurHome</h1>
+                    </a>
+                    <!-- ***** Logo End ***** -->
+
+                    <!-- ***** Menu Start ***** -->
+                    <ul class="nav">
+                        <li><a th:href="@{/}">Home</a></li>
+                        <li sec:authorize="isAuthenticated()"><a th:href="@{/messages}">Messages</a></li>
+                        <small th:with="userId=${userViewModel.getId()}">
+                            <samp th:if="${@messageRepository.countUnreadMessages(userId) > 0}"
+                                  th:with="userId=${userViewModel.getId()}"
+                                  class="timer count-title text-danger"
+                                  th:data-to="${@messageRepository.countUnreadMessages(userId)}"
+                                  data-speed="1000"></samp>
+                        </small>
+                        <li sec:authorize="hasAnyRole('MANAGER', 'MODERATOR')"><a th:href="@{/administration}"
+                                                                                  class="active">Administration</a></li>
+                        <li sec:authorize="hasAnyRole('RESIDENT', 'MODERATOR')"><a th:href="@{/property}">Your
+                            property</a></li>
+                        <li sec:authorize="isAuthenticated()"><a th:href="@{/profile}">Profile</a></li>
+                        <li><a th:href="@{/contact}">Contact Us</a></li>
+                        <li sec:authorize="!isAuthenticated()"><a th:href="@{/register}">Register</a></li>
+                        <form sec:authorize="isAuthenticated()" id="logout" th:action="@{/logout}" method="POST">
+                            <li><a onclick="logout.submit()" style="cursor: pointer;">Logout</a></li>
+                        </form>
+                        <li sec:authorize="!isAuthenticated()"><a th:href="@{/login}">Login</a></li>
+                    </ul>
+                    <a class='menu-trigger'>
+                        <span>Menu</span>
+                    </a>
+                    <!-- ***** Menu End ***** -->
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- ***** BANNER *****-->
+<div class="page-heading header-text">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="row">
+                    <strong th:if="${notDeleted}" class="text-danger">Cannot delete entity with already registered
+                        residents!</strong>
+                    <strong th:if="${deleted}" class="text-success">Residential entity successfully deleted!</strong>
+                    <div class="column-gap-2">
+                        <br>
+                        <span class="breadcrumb">
+            <a href="/administration/add">Create new Residential entity</a>
+          </span>
+                    </div>
+                </div>
+                <h3 th:if="${@residentialEntityRepository.countByManager_Id(userViewModel.getId()) == 0}">
+                    0 residential entities available
+                </h3>
+                <h3 th:if="${@residentialEntityRepository.countByManager_Id(userViewModel.getId()) == 1}"
+                    th:text="${@residentialEntityRepository.countByManager_Id(userViewModel.getId())} +
+                    ' residential entity available'"></h3>
+                <h3 th:if="${@residentialEntityRepository.countByManager_Id(userViewModel.getId()) > 1}"
+                    th:text="${@residentialEntityRepository.countByManager_Id(userViewModel.getId())} +
+                    ' residential entities available'"></h3>
+            </div>
+        </div>
+    </div>
+</div>
+<br><br>
+<!-- ***** Residential entity section ***** -->
+<div class="section single-property">
+    <div th:if="${@residentialEntityRepository.countByManager_Id(userViewModel.getId()) > 0}" class="container">
+        <div th:each="residentialEntity: ${@residentialEntityRepository.findAllByManager_Id(userViewModel.getId())}"
+             class="row">
+            <!--        start of buttons-->
+            <div class="tabs-content">
+                <ul class="nav nav-tabs">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="summaryButton"><a
+                                th:href="@{/administration}">
+                            <h5>Summary</h5>
+                        </a>
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="residentsButton"><a
+                                th:href="@{/administration/residents/{id}(id=${residentialEntity.getId()})}">
+                            <h5>Residents</h5>
+                        </a>
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="propertiesButton"><a
+                                th:href="@{/administration/property/{id}(id=${residentialEntity.getId()})}">
+                            <h5>Properties</h5>
+                        </a>
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="texesButton"><a
+                                th:href="@{/}">
+                            <h5>Taxes</h5>
+                        </a>
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="detailsButton"><a
+                                th:href="@{/administration/details/{id}(id=${residentialEntity.getId()})}">
+                            <h5>Details</h5>
+                        </a>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+            <!--        end of buttons-->
+            <div class="col-lg-7">
+                <div class="section" id="details">
+                </div>
+                <div class="col-lg-5">
+                    <div class="main-content">
+                    <span th:text="'Residential entity: ' + ${residentialEntity.getId()}"
+                          class="category text-black"></span>
+                        <h4 th:text="${residentialEntity.getStreetName()} + ' №' + ${residentialEntity.getStreetNumber()}"></h4>
+                    </div>
+                </div>
+                <div class="accordion" id="accordionExample">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingOne">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                Property registrations:
+                            </button>
+                        </h2>
+                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                             data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                Every new property registration in your Residential entity requires your approval.<br>
+                                Before validation the user won't be able to access any data of your residential
+                                entity. The data will become visible after successful profile validation.
+                                <hr>
+                                You have
+                                <strong th:if="${@propertyRepository.countNotVerifiedPropertiesByResidentialEntity(residentialEntity.getId()) > 0}"
+                                        class="timer count-title text-danger"
+                                        th:data-to="${@propertyRepository.countNotVerifiedPropertiesByResidentialEntity(residentialEntity.getId())}"
+                                        data-speed="1000"></strong>
+                                <strong class="text-success"
+                                        th:if="${@propertyRepository.countNotVerifiedPropertiesByResidentialEntity(residentialEntity.getId()) == 0}"
+                                >0</strong>
+                                pending validation requests in your Residential entity.
+                                <br>
+                                <a th:if="${@propertyRepository.countNotVerifiedPropertiesByResidentialEntity(residentialEntity.getId()) > 0}"
+                                   th:href="@{/administration/property/{id}(id=${residentialEntity.getId()})}">Validate
+                                    now!</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingTwo">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                Residents registrations
+                            </button>
+                        </h2>
+                        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+                             data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                You can manage the list of <a
+                                    th:href="@{/administration/residents/{id}(id=${residentialEntity.getId()})}">residents</a>
+                                in your residential entity by
+                                giving them
+                                different roles or removing them from the list. Make sure, that every registered
+                                resident belongs
+                                to your residential entity.
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingThree">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseThree" aria-expanded="false"
+                                    aria-controls="collapseThree">
+                                <a>Delete Residential entity</a>
+                            </button>
+                        </h2>
+                        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
+                             data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                Every residential entity could be deleted by it's <strong>Manager</strong>.<br>
+                                To be able to delete an entity you have to be sure that there are no residents in this
+                                residential entity.
+                                <form th:action="@{/administration/remove/{id}(id=${residentialEntity.getId()})}"
+                                      method="POST">
+                                    <input type="hidden" name="deleteResidentialEntity"
+                                           th:value="${residentialEntity.getId()}"/>
+                                    <input type="submit" value="Delete!" class="category text-danger"/>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <div align="center" class="info-table">
+                    <a th:href="@{/administration/details/{id}(id=${residentialEntity.getId()})}"><img
+                            src="/images/residential-entity.jpg" alt="" style="max-width: 150px;"></a>
+                    <br></br>
+                    <div class="mt-3 rounded badge-warning">
+                        <li class="text-center">City:
+                            <a class="text-black"
+                               th:text="${residentialEntity.getCity().getName()}"></a></li>
+                        <hr>
+                        <li class="text-center">Street name:
+                            <a class="text-black"
+                               th:text="${residentialEntity.getStreetName()}"></a></li>
+                        <hr>
+                        <li class="text-center">Street №:
+                            <a class="text-black"
+                               th:text="${residentialEntity.getStreetNumber()}"></a></li>
+                        <hr>
+                        <li class="text-center">Manager:
+                            <a class="text-black"
+                               th:text="${residentialEntity.getManager().getFirstName()} + ' ' + ${residentialEntity.getManager().getLastName()}"></a>
+                        </li>
+                        <br/>
+                        <div align="center" class="main-content">
+                           <span class="category">
+                               <a th:href="@{/administration/details/{id}(id=${residentialEntity.getId()})}"
+                                  class="text-black">View details</a>
+                               </span>
+                            <h4></h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <br>
+                <br>
+                <hr>
+                <br>
+                <br>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer th:replace="~{fragments/footer}">
+</footer>
+
+<!-- Scripts -->
+<!-- Bootstrap core JavaScript -->
+<script src="/jquery/jquery.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/isotope.min.js"></script>
+<script src="/js/owl-carousel.js"></script>
+<script src="/js/counter.js"></script>
+<script src="/js/custom.js"></script>
+
+</body>
+</html>

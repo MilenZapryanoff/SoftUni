@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang='en'
+      xmlns:th='http://www.thymeleaf.org'
+      xmlns:sec='http://www.thymeleaf.org/extras/spring-security'>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+          rel="stylesheet">
+
+    <title>OurHome - Home management platform</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="/css/fontawesome.css">
+    <link rel="stylesheet" href="/css/our-home.css">
+    <link rel="stylesheet" href="/css/owl.css">
+    <link rel="stylesheet" href="/css/animate.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
+
+</head>
+<body>
+
+<!-- ***** Preloader Start ***** -->
+<div id="js-preloader" class="js-preloader">
+    <div class="preloader-inner">
+        <span class="dot"></span>
+        <div class="dots">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+</div>
+<!-- ***** Preloader End ***** -->
+
+<!-- ***** Header ***** -->
+<div th:replace="~{fragments/header}" class="sub-header">
+</div>
+
+<!-- ***** NavBar ***** -->
+<header class="header-area header-sticky">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav class="main-nav">
+                    <!-- ***** Logo Start ***** -->
+                    <a th:href="@{/}" class="logo">
+                        <h1>OurHome</h1>
+                    </a>
+                    <!-- ***** Logo End ***** -->
+                    <!-- ***** Menu Start ***** -->
+                    <ul class="nav">
+                        <li><a th:href="@{/}" class="active">Home</a></li>
+                        <li sec:authorize="isAuthenticated()"><a th:href="@{/messages}">Messages</a></li>
+                        <small sec:authorize="isAuthenticated()" th:with="userId=${userViewModel.getId()}">
+                            <samp th:if="${@messageRepository.countUnreadMessages(userId) > 0}"
+                                  th:with="userId=${userViewModel.getId()}"
+                                  class="timer count-title text-danger"
+                                  th:data-to="${@messageRepository.countUnreadMessages(userId)}"
+                                  data-speed="1000"></samp>
+                        </small>
+                        <li sec:authorize="hasAnyRole('MANAGER','MODERATOR')"><a th:href="@{/administration}">Administration</a>
+                        </li>
+                        <li sec:authorize="hasAnyRole('RESIDENT','MODERATOR')"><a th:href="@{/property}">Your
+                            property</a></li>
+                        <li sec:authorize="isAuthenticated()"><a th:href="@{/profile}">Profile</a></li>
+                        <li><a th:href="@{/contact}">Contact Us</a></li>
+                        <li sec:authorize="!isAuthenticated()"><a th:href="@{/register}">Register</a></li>
+                        <form sec:authorize="isAuthenticated()" id="logout" th:action="@{/logout}" method="POST">
+                            <li><a onclick="logout.submit()" style="cursor: pointer;">Logout</a></li>
+                        </form>
+                        <li sec:authorize="!isAuthenticated()"><a th:href="@{/login}">Login</a></li>
+                    </ul>
+                    <a class='menu-trigger'>
+                        <span>Menu</span>
+                    </a>
+                    <!-- ***** Menu End ***** -->
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- ***** Main Banner Start ***** -->
+<div class="main-banner">
+    <div class="owl-carousel owl-banner">
+        <div class="item item-1">
+            <div class="header-text">
+                <span class="category">Control your <em>spendings</em></span>
+                <h2>IT IS SO EASY NOW!</h2>
+            </div>
+        </div>
+        <div class="item item-2">
+            <div class="header-text">
+                <span class="category">Act as a <em>team</em></span>
+                <h2>DO THINGS THE RIGHT WAY</h2>
+            </div>
+        </div>
+        <div class="item item-3">
+            <div class="header-text">
+                <span class="category">With care for the <em>future</em></span>
+                <h2>MAKE YOUR LIVING ENVIRONMENT BETTER</h2>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ***** Main Banner End ***** -->
+
+<hr>
+
+<!-- ***** Fun Facts Start ***** -->
+<div class="fun-facts">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="wrapper">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="counter">
+                                <h2 class="timer count-title count-number"
+                                    th:data-to="${@residentialEntityRepository.count()}" data-speed="1000"></h2>
+                                <p class="count-text ">Residential <br>entities</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="counter">
+                                <!--/*@thymesVar id="MANAGER" type="text" */-->
+                                <h2 class="timer count-title count-number" th:data-to="${@propertyRepository.count()}"
+                                    data-speed="1000"></h2>
+                                <p class="count-text ">Registered<br>Homes</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="counter">
+                                <h2 class="timer count-title count-number" th:data-to="${@userRepository.count()}"
+                                    data-speed="1000"></h2>
+                                <p class="count-text ">Registered<br>residents</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ***** Fun Facts Start ***** -->
+
+<!-- ***** Contact section Start ***** -->
+<div class="contact section-contact">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 offset-lg-4">
+                <div class="section-heading text-center">
+                    <h6>| Become a partner</h6>
+                    <h2>Get In Touch With Our Agents</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<hr></hr>
+
+<div class="input-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-7">
+                <div id="map">
+                    <iframe src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA4dMp6ervBxmwa9av_R4vRj-RhYx22TGg&q=Software University,Sofia,Bulgaria"
+                            width="100%" height="350px" frameborder="0"
+                            style="border:0; border-radius: 10px; box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.15);"
+                            allowfullscreen=""></iframe>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="item phone">
+                            <img src="/images/phone-icon.png" alt="" style="max-width: 52px;">
+                            <h6>0886 277 333<br><span>Phone Number</span></h6>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="item email">
+                            <img src="/images/email-icon.png" alt="" style="max-width: 52px;">
+                            <h6>milen.zapryanov@mail.bg<br><span>Business Email</span></h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <form id="input-form" action="" method="post">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <fieldset>
+                                <label for="name">Full Name</label>
+                                <input type="name" name="name" id="name" placeholder="Your Name..." autocomplete="on"
+                                       required>
+                            </fieldset>
+                        </div>
+                        <div class="col-lg-12">
+                            <fieldset>
+                                <label for="email">Email Address</label>
+                                <input type="text" name="email" id="email" pattern="[^ @]*@[^ @]*"
+                                       placeholder="Your E-mail..." required="">
+                            </fieldset>
+                        </div>
+                        <div class="col-lg-12">
+                            <fieldset>
+                                <label for="subject">Subject</label>
+                                <input type="subject" name="subject" id="subject" placeholder="Subject..."
+                                       autocomplete="on">
+                            </fieldset>
+                        </div>
+                        <div class="col-lg-12">
+                            <fieldset>
+                                <label for="message">Message</label>
+                                <textarea name="message" id="message" placeholder="Your Message"></textarea>
+                            </fieldset>
+                        </div>
+                        <div class="col-lg-12">
+                            <fieldset>
+                                <button type="submit" id="form-submit" class="orange-button">Send Message</button>
+                            </fieldset>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ***** Contact section End ***** -->
+
+<!-- Footer -->
+<footer th:replace="~{fragments/footer}">
+</footer>
+
+<!-- Scripts -->
+<!-- Bootstrap core JavaScript -->
+<script src="/jquery/jquery.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/isotope.min.js"></script>
+<script src="/js/owl-carousel.js"></script>
+<script src="/js/counter.js"></script>
+<script src="/js/custom.js"></script>
+
+</body>
+</html>

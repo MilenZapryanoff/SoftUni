@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang='en'
+      xmlns:th='http://www.thymeleaf.org'
+      xmlns:sec='http://www.thymeleaf.org/extras/spring-security'>
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+          rel="stylesheet">
+
+    <title>OurHome - Home management platform</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="/css/fontawesome.css">
+    <link rel="stylesheet" href="/css/our-home.css">
+    <link rel="stylesheet" href="/css/owl.css">
+    <link rel="stylesheet" href="/css/animate.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
+
+</head>
+
+<body>
+
+<!-- ***** Preloader Start ***** -->
+<div id="js-preloader" class="js-preloader">
+    <div class="preloader-inner">
+        <span class="dot"></span>
+        <div class="dots">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+</div>
+<!-- ***** Preloader End ***** -->
+
+<!-- ***** Header ***** -->
+<div th:replace="~{fragments/header}" class="sub-header">
+</div>
+
+<!-- ***** NavBar ***** -->
+<header class="header-area header-sticky">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav class="main-nav">
+                    <!-- ***** Logo Start ***** -->
+                    <a th:href="@{/}" class="logo">
+                        <h1>OurHome</h1>
+                    </a>
+                    <!-- ***** Logo End ***** -->
+
+                    <!-- ***** Menu Start ***** -->
+                    <ul class="nav">
+                        <li><a th:href="@{/}">Home</a></li>
+                        <li sec:authorize="isAuthenticated()"><a th:href="@{/messages}">Messages</a></li>
+                        <small th:with="userId=${userViewModel.getId()}">
+                            <samp th:if="${@messageRepository.countUnreadMessages(userId) > 0}"
+                                  th:with="userId=${userViewModel.getId()}"
+                                  class="timer count-title text-danger"
+                                  th:data-to="${@messageRepository.countUnreadMessages(userId)}"
+                                  data-speed="1000"></samp>
+                        </small>
+                        <li sec:authorize="hasAnyRole('MANAGER','MODERATOR')"><a th:href="@{/administration}"
+                                                                                 class="active">Administration</a>
+                        </li>
+                        <li sec:authorize="hasAnyRole('RESIDENT','MODERATOR')"><a th:href="@{/property}">Your
+                            property</a></li>
+                        <li sec:authorize="isAuthenticated()"><a th:href="@{/profile}">Profile</a></li>
+                        <li><a th:href="@{/contact}">Contact Us</a></li>
+                        <li sec:authorize="!isAuthenticated()"><a th:href="@{/register}">Register</a></li>
+                        <form sec:authorize="isAuthenticated()" id="logout" th:action="@{/logout}" method="POST">
+                            <li><a onclick="logout.submit()" style="cursor: pointer;">Logout</a></li>
+                        </form>
+                        <li sec:authorize="!isAuthenticated()"><a th:href="@{/login}">Login</a></li>
+                    </ul>
+                    <a class='menu-trigger'>
+                        <span>Menu</span>
+                    </a>
+                    <!-- ***** Menu End ***** -->
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- ***** BANNER *****-->
+<div class="page-heading header-text">
+    <div class="container">
+        <div class="row">
+            <h3>Residential entity details
+            </h3>
+        </div>
+    </div>
+</div>
+</div>
+
+<br><br>
+
+<!-- ***** Residential entity section ***** -->
+
+
+<div class="single-property section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="main-content">
+                    <span th:text="'Residential entity: ' + ${residentialEntity.getId()}"
+                          class="category text-black"></span>
+                    <h4 th:text="${residentialEntity.getStreetName()} + ' №' + ${residentialEntity.getStreetNumber()}"></h4>
+                </div>
+            </div>
+            <div class="section administration" id="details">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="tabs-content">
+                                <div class="row">
+                                    <div class="nav-wrapper ">
+                                        <ul class="nav nav-tabs" role="tablist">
+
+
+                                            <!--                                                </button>-->
+                                            <!--                                                <button class="nav-link" id="residents"><a-->
+                                            <!--                                                        th:href="@{/administration}">-->
+                                            <!--                                                    <h7 class="text-light">Cancel</h7>-->
+                                            <!--                                                </a>-->
+                                            <!--                                                </button>-->
+
+                                            <div class="col-lg-12">
+                                                <br></br>
+                                                <div class="messages">
+                                                    <div align="center" class="input-content">
+                                                        <div class="col-lg-6">
+                                                            <form id="input-form"
+                                                                  th:method="POST"
+                                                                  th:action="@{/administration/details/edit/{entityId}(entityId=${residentialEntity.getId()})}"
+                                                                  th:object="${residentialEntityEditBindingModel}">
+                                                                <div class="col-lg-12">
+                                                                    <fieldset>
+                                                                        <label for="city"><b>City</b></label>
+                                                                        <select class="form-control" id="city"
+                                                                                th:field="*{city}">
+                                                                            <option th:each="cityOption : ${T(com.example.OurHome.model.Entity.enums.CityName).values()}"
+                                                                                    th:value="${cityOption}"
+                                                                                    th:text="${cityOption}"
+                                                                                    th:selected="${cityOption == residentialEntityEditBindingModel.city}"></option>
+                                                                        </select>
+                                                                    </fieldset>
+                                                                    <small th:if="${#fields.hasErrors('city')}"
+                                                                           th:errors="*{city}" class="text-danger">City error message</small>
+                                                                    <fieldset>
+                                                                        <label for="streetName"><b>Street Name</b></label>
+                                                                        <br>
+                                                                        <small th:if="${#fields.hasErrors('streetName')}"
+                                                                               th:errors="*{streetName}"
+                                                                               class="text-danger">Street name error
+                                                                            message</small>
+                                                                        <input type="text" id="streetName"
+                                                                               placeholder="Enter street name..."
+                                                                               autocomplete="on"
+                                                                               required th:field="*{streetName}"
+                                                                               th:errorclass="bg-danger"
+                                                                               th:value="${residentialEntityEditBindingModel.streetName}">
+                                                                    </fieldset>
+                                                                    <fieldset>
+                                                                        <label for="streetNumber"><b>Street №</b></label>
+                                                                        <br>
+                                                                        <small th:if="${#fields.hasErrors('streetNumber')}"
+                                                                               th:errors="*{streetNumber}"
+                                                                               class="text-danger">Street number error message</small>
+                                                                        <input type="text" id="streetNumber"
+                                                                               placeholder="Enter street №..."
+                                                                               autocomplete="on" required
+                                                                               th:field="*{streetNumber}"
+                                                                               th:errorclass="bg-danger"
+                                                                               th:value="${residentialEntityEditBindingModel.streetNumber}">
+                                                                    </fieldset>
+                                                                    <fieldset>
+                                                                        <label for="entrance"><b>Entrance №</b></label>
+                                                                        <br>
+                                                                        <small th:if="${#fields.hasErrors('entrance')}"
+                                                                               th:errors="*{entrance}"
+                                                                               class="text-danger">Entrance error message</small>
+                                                                        <input type="text" id="entrance"
+                                                                               placeholder="Enter Entrance №..."
+                                                                               th:field="*{entrance}"
+                                                                               th:errorclass="bg-danger"
+                                                                               th:value="${residentialEntityEditBindingModel.entrance}">
+                                                                    </fieldset>
+                                                                    <fieldset>
+                                                                        <label for="numberOfApartments"><b>Number of properties</b></label>
+                                                                        <br>
+                                                                        <small th:if="${#fields.hasErrors('numberOfApartments')}"
+                                                                               th:errors="*{numberOfApartments}"
+                                                                               class="text-danger">Number of properties
+                                                                            error
+                                                                            message</small>
+                                                                        <input type="text" id="numberOfApartments"
+                                                                               placeholder="Enter number of properties ..."
+                                                                               required
+                                                                               th:field="*{numberOfApartments}"
+                                                                               th:errorclass="bg-danger"
+                                                                               th:value="${residentialEntityEditBindingModel.numberOfApartments}">
+                                                                    </fieldset>
+                                                                    <fieldset>
+                                                                        <label for="accessCode"><b>Access code</b> (optional)</label>
+                                                                        <br>
+                                                                        <small th:if="${#fields.hasErrors('accessCode')}"
+                                                                               th:errors="*{accessCode}"
+                                                                               class="text-danger">Access code error</small>
+                                                                        <small th:if="${bad_accessCode}"
+                                                                               class="text-danger">Access code must be between 3 and 20 symbols!</small>
+                                                                        <input type="password" id="accessCode"
+                                                                               placeholder="Enter new access code..."
+                                                                               autocomplete="on"
+                                                                               th:field="*{accessCode}"
+                                                                               th:errorclass="bg-danger">
+                                                                    </fieldset>
+                                                                    <fieldset>
+                                                                        <label for="confirmAccessCode"><b>Confirm access code</b> (optional)</label>
+                                                                        <br>
+                                                                        <small th:if="${#fields.hasErrors('confirmAccessCode')}"
+                                                                               th:errors="*{confirmAccessCode}"
+                                                                               class="text-danger">Confirm access code error</small>
+                                                                        <small th:if="${noAccessCodeMatch}"
+                                                                               class="text-danger">Confirm access code do not match!</small>
+                                                                        <input type="password" id="confirmAccessCode"
+                                                                               placeholder="Confirm access code..."
+                                                                               autocomplete="on"
+                                                                               th:field="*{confirmAccessCode}"
+                                                                               th:errorclass="bg-danger">
+                                                                    </fieldset>
+                                                                    <fieldset>
+                                                                        <button type="submit" id="form-submit"
+                                                                                class="orange-button">Submit
+                                                                        </button>
+                                                                        <button class="orange-button" id="form-cancel">
+                                                                            <a
+                                                                                    th:href="@{/administration/details/{id}(id=${residentialEntity.getId()})}">
+                                                                                <h7 class="text-light">Back</h7>
+                                                                            </a>
+                                                                        </button>
+                                                                    </fieldset>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer th:replace="~{fragments/footer}">
+</footer>
+
+<!-- Scripts -->
+<!-- Bootstrap core JavaScript -->
+<script src="/jquery/jquery.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/isotope.min.js"></script>
+<script src="/js/owl-carousel.js"></script>
+<script src="/js/counter.js"></script>
+<script src="/js/custom.js"></script>
+
+
+</body>
+</html>

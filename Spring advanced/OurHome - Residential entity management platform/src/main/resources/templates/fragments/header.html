@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang='en'
+      xmlns:th='http://www.thymeleaf.org'
+      xmlns:sec='http://www.thymeleaf.org/extras/spring-security'>
+
+<head>
+</head>
+
+<body>
+<th:block sec:authorize="isAuthenticated()">
+    <div th:fragment="header" class="sub-header">
+        <div align="right" class="container">
+            <div class="row">
+                <th:block>
+                    <small>
+                        Welcome,
+                        <strong th:text="${userViewModel.getFirstName()} + ' ' + ${userViewModel.getLastName()}"
+                                class="text-danger"
+                        ></strong></small>
+                </th:block>
+            </div>
+        </div>
+    </div>
+</th:block>
+<!-- ***** Sub-header End ***** -->
+
+</body>
+</html>

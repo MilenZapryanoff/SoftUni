@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang='en'
+      xmlns:th='http://www.thymeleaf.org'
+      xmlns:sec='http://www.thymeleaf.org/extras/spring-security'>
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+          rel="stylesheet">
+
+    <title>OurHome - Home management platform</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="/css/fontawesome.css">
+    <link rel="stylesheet" href="/css/our-home.css">
+    <link rel="stylesheet" href="/css/owl.css">
+    <link rel="stylesheet" href="/css/animate.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
+
+</head>
+
+<body>
+
+<!-- ***** Preloader Start ***** -->
+<div id="js-preloader" class="js-preloader">
+    <div class="preloader-inner">
+        <span class="dot"></span>
+        <div class="dots">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+</div>
+<!-- ***** Preloader End ***** -->
+
+<!-- ***** Header ***** -->
+<div th:replace="~{fragments/header}" class="sub-header">
+</div>
+
+<!-- ***** NavBar ***** -->
+<header class="header-area header-sticky">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav class="main-nav">
+                    <!-- ***** Logo Start ***** -->
+                    <a th:href="@{/}" class="logo">
+                        <h1>OurHome</h1>
+                    </a>
+                    <!-- ***** Logo End ***** -->
+
+                    <!-- ***** Menu Start ***** -->
+                    <ul class="nav">
+                        <li><a th:href="@{/}">Home</a></li>
+                        <li sec:authorize="isAuthenticated()"><a th:href="@{/messages}">Messages</a></li>
+                        <small th:with="userId=${userViewModel.getId()}">
+                            <samp th:if="${@messageRepository.countUnreadMessages(userId) > 0}"
+                                  th:with="userId=${userViewModel.getId()}"
+                                  class="timer count-title text-danger"
+                                  th:data-to="${@messageRepository.countUnreadMessages(userId)}"
+                                  data-speed="1000"></samp>
+                        </small>
+                        <li sec:authorize="hasAnyRole('MANAGER','MODERATOR')"><a th:href="@{/administration}"
+                                                                                 class="active">Administration</a>
+                        </li>
+                        <li sec:authorize="hasAnyRole('RESIDENT','MODERATOR')"><a th:href="@{/property}">Your
+                            property</a></li>
+                        <li sec:authorize="isAuthenticated()"><a th:href="@{/profile}">Profile</a></li>
+                        <li><a th:href="@{/contact}">Contact Us</a></li>
+                        <li sec:authorize="!isAuthenticated()"><a th:href="@{/register}">Register</a></li>
+                        <form sec:authorize="isAuthenticated()" id="logout" th:action="@{/logout}" method="POST">
+                            <li><a onclick="logout.submit()" style="cursor: pointer;">Logout</a></li>
+                        </form>
+                        <li sec:authorize="!isAuthenticated()"><a th:href="@{/login}">Login</a></li>
+                    </ul>
+                    <a class='menu-trigger'>
+                        <span>Menu</span>
+                    </a>
+                    <!-- ***** Menu End ***** -->
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- ***** BANNER *****-->
+<div class="page-heading header-text">
+    <div class="container">
+        <div class="row">
+            <h3>Residents details
+            </h3>
+        </div>
+    </div>
+</div>
+</div>
+
+<br><br>
+
+<!-- ***** Residential entity section ***** -->
+
+
+<div class="single-property section">
+    <div class="container">
+        <!--        start of buttons-->
+        <div class="tabs-content">
+            <ul class="nav nav-tabs">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="summaryButton"><a
+                            th:href="@{/administration}">
+                        <h5>Summary</h5>
+                    </a>
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="residentsButton"><a
+                            th:href="@{/administration/residents/{id}(id=${residentialEntity.getId()})}">
+                        <h5>Residents</h5>
+                    </a>
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="propertiesButton"><a
+                            th:href="@{/administration/property/{id}(id=${residentialEntity.getId()})}">
+                        <h5>Properties</h5>
+                    </a>
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="texesButton"><a
+                            th:href="@{/}">
+                        <h5>Taxes</h5>
+                    </a>
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="detailsButton"><a
+                            th:href="@{/administration/details/{id}(id=${residentialEntity.getId()})}">
+                        <h5>Details</h5>
+                    </a>
+                    </button>
+                </li>
+            </ul>
+        </div>
+        <!--        end of buttons-->
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="main-content">
+                    <span th:text="'Residential entity: ' + ${residentialEntity.getId()}"
+                          class="category text-black"></span>
+                    <h4 th:text="${residentialEntity.getStreetName()} + ' №' + ${residentialEntity.getStreetNumber()}"></h4>
+                </div>
+            </div>
+            <div class="section administration" id="details">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="tabs-content">
+                                <div class="row">
+                                    <p th:if="${residentialEntity.getResidents().size()} == 0"
+                                       align="center">No residents available</p>
+                                    <div class="nav-wrapper ">
+                                        <ul class="nav nav-tabs" role="tablist">
+                                            <li class="nav-item" role="presentation">
+                                                <button class="nav-link" id="residents"><a
+                                                        th:href="@{/administration}">
+                                                    <h7 class="text-light">Back</h7>
+                                                </a>
+                                                </button>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="tab-content" id="myTabContent">
+                                        <div class="tab-pane fade show active" id="Properties" role="tabpanel"
+                                             aria-labelledby="properties-tab-tab">
+                                            <div class="row">
+                                                <table th:if="${residentialEntity.getResidents().size()} > 0">
+                                                    <tr align="center">
+                                                        <th>First name</th>
+                                                        <th>Last name</th>
+                                                        <th>Username</th>
+                                                        <th>E-mail</th>
+                                                        <th>Phone number</th>
+                                                        <th>Role</th>
+                                                        <th>Message</th>
+                                                        <th>Remove</th>
+                                                    </tr>
+
+                                                    <tr align="center"
+                                                        th:each="resident: ${residentialEntity.getResidents()}">
+                                                        <td th:text="${resident.getFirstName()}"></td>
+                                                        <td th:text="${resident.getLastName()}"></td>
+                                                        <td th:text="${resident.getUsername()}"></td>
+                                                        <td th:text="${resident.getEmail()}"></td>
+                                                        <td th:text="${resident.getPhoneNumber()}"></td>
+                                                        <td>
+                                                            <!-- START: Roles change button-->
+                                                            <form class="form-container"
+                                                                  th:action="@{/administration/residents/edit_role/{id} (id=${resident.getId()})}"
+                                                                  th:method="POST"
+                                                                  th:object="${residentManageBindingModel}">
+
+                                                                <select class="form-control hidden" id="userId"
+                                                                        th:field="*{userId}">
+                                                                    <option th:if="${@residentialEntityRepository.isUserModeratorOfResidentialEntity(residentialEntity.getId(), resident.getId()) == 0}"
+                                                                            th:value="${resident.getId()}"
+                                                                            th:text="${resident.getId()}">
+                                                                    </option>
+                                                                    <option th:if="${@residentialEntityRepository.isUserModeratorOfResidentialEntity(residentialEntity.getId(), resident.getId()) > 0}"
+                                                                            value="">
+                                                                    </option>
+                                                                </select>
+                                                                <select class="form-control hidden"
+                                                                        id="entityId"
+                                                                        th:field="*{entityId}">
+                                                                    <option
+                                                                            th:value="${residentialEntity.getId()}"
+                                                                            th:text="${residentialEntity.getId()}">
+                                                                    </option>
+                                                                </select>
+                                                                <button class="form-control"
+                                                                        title="Change role to MODERATOR"
+                                                                        th:if="${@residentialEntityRepository.isUserModeratorOfResidentialEntity(residentialEntity.getId(), resident.getId()) == 0}"
+                                                                        type="submit">Resident
+                                                                </button>
+                                                                <button class="form-control text-danger"
+                                                                        title="Change role to RESIDENT"
+                                                                        th:if="${@residentialEntityRepository.isUserModeratorOfResidentialEntity(residentialEntity.getId(), resident.getId()) > 0}"
+                                                                        type="submit">Moderator
+                                                                </button>
+                                                            </form>
+                                                            <!-- END OF: Roles change button-->
+                                                        </td>
+                                                        <td>
+                                                            <form th:action="@{/administration/{id} (id=${resident.getId()})}"
+                                                                  th:method="POST">
+                                                                <button type="submit">
+                                                                    <img title="Send message" src="/images/send-msg.jpg"
+                                                                         style="max-width: 111px"></button>
+                                                            </form>
+                                                        </td>
+                                                        <td>
+                                                            <form th:action="@{/administration/{id} (id=${resident.getId()})}"
+                                                                  th:method="POST">
+                                                                <button type="submit">
+                                                                    <img title="Remove resident"
+                                                                         src="/images/delete.jpg"
+                                                                         style="max-width: 111px;"></button>
+                                                            </form>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer th:replace="~{fragments/footer}">
+</footer>
+
+<!-- Scripts -->
+<!-- Bootstrap core JavaScript -->
+<script src="/jquery/jquery.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/isotope.min.js"></script>
+<script src="/js/owl-carousel.js"></script>
+<script src="/js/counter.js"></script>
+<script src="/js/custom.js"></script>
+
+
+</body>
+</html>

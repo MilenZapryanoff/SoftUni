@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang='en'
+      xmlns:th='http://www.thymeleaf.org'
+      xmlns:sec='http://www.thymeleaf.org/extras/spring-security'>
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+          rel="stylesheet">
+
+    <!-- Bootstrap core CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="/css/fontawesome.css">
+    <link rel="stylesheet" href="/css/our-home.css">
+    <link rel="stylesheet" href="/css/owl.css">
+    <link rel="stylesheet" href="/css/animate.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
+    <!--
+
+    TemplateMo 591 villa agency
+
+    https://templatemo.com/tm-591-villa-agency
+
+    -->
+</head>
+
+<body>
+
+<!-- ***** Preloader Start ***** -->
+<div id="js-preloader" class="js-preloader">
+    <div class="preloader-inner">
+        <span class="dot"></span>
+        <div class="dots">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+</div>
+<!-- ***** Preloader End ***** -->
+
+<!-- ***** Header ***** -->
+<div th:replace="~{fragments/header}" class="sub-header">
+</div>
+
+<!-- ***** NavBar ***** -->
+<header class="header-area header-sticky">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav class="main-nav">
+                    <!-- ***** Logo Start ***** -->
+                    <a th:href="@{/}" class="logo">
+                        <h1>OurHome</h1>
+                    </a>
+                    <!-- ***** Logo End ***** -->
+                    <!-- ***** Menu Start ***** -->
+                    <ul class="nav">
+                        <li><a th:href="@{/}">Home</a></li>
+                        <li sec:authorize="isAuthenticated()"><a th:href="@{/messages}">Messages</a></li>
+                        <small th:with="userId=${userViewModel.getId()}">
+                            <samp th:if="${@messageRepository.countUnreadMessages(userId) > 0}"
+                                  th:with="userId=${userViewModel.getId()}"
+                                  class="timer count-title text-danger"
+                                  th:data-to="${@messageRepository.countUnreadMessages(userId)}"
+                                  data-speed="1000"></samp>
+                        </small>
+                        <li sec:authorize="hasAnyRole('MANAGER','MODERATOR')"><a th:href="@{/administration}">Administration</a></li>
+                       <li sec:authorize="hasAnyRole('RESIDENT','MODERATOR')"><a th:href="@{/property}" class="active">Your property</a>
+                        </li>
+                       <li sec:authorize="isAuthenticated()"><a th:href="@{/profile}">Profile</a></li>
+                        <li><a th:href="@{/contact}">Contact Us</a></li>
+                        <li sec:authorize="!isAuthenticated()"><a th:href="@{/register}">Register</a></li>
+                        <form sec:authorize="isAuthenticated()" id="logout" th:action="@{/logout}" method="POST">
+                            <li><a onclick="logout.submit()" style="cursor: pointer;">Logout</a></li>
+                        </form>
+                        <li sec:authorize="!isAuthenticated()"><a th:href="@{/login}">Login</a></li>
+                    </ul>
+                    <a class='menu-trigger'>
+                        <span>Menu</span>
+                    </a>
+                    <!-- ***** Menu End ***** -->
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="page-heading header-text">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="row">
+                    <!--                    <strong th:if="${notDeleted}" class="text-danger">Cannot delete entity with already registered residents!</strong>-->
+                    <!--                    <strong th:if="${deleted}" class="text-success">Residential entity successfully deleted!</strong>-->
+                    <div class="column-gap-2">
+                        <br>
+                        <span class="breadcrumb">
+            <a th:href="@{/property/add}">Add new Property</a>
+          </span>
+                    </div>
+                </div>
+                <h3 th:if="${userViewModel.getProperties().size() == 0}">
+                    0 Properties available
+                </h3>
+                <h3 th:if="${userViewModel.getProperties().size() == 1}"
+                    th:text="${userViewModel.getProperties().size()} +
+                    ' property available'"></h3>
+                <h3 th:if="${userViewModel.getProperties().size() > 1}"
+                    th:text="${userViewModel.getProperties().size()} +
+                    ' properties available'"></h3>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:if="${userViewModel.getProperties().size() == 0}" class="section properties">
+    <div class="container">
+        <br>
+        <ul class="properties-filter-non-verified">
+        </ul>
+        <div class="row properties-box">
+            <div class="col-lg-12">
+                <p align="center">No registered properties</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div th:if="${userViewModel.getProperties().size() > 0}">
+
+
+    <!--    <div th:if="${userViewModel.getProperties().size() == 0}" class="section properties">-->
+    <!--        <div class="container">-->
+    <!--            <br>-->
+    <!--            <ul class="properties-filter-non-verified">-->
+    <!--                <li>-->
+    <!--                    <a href="#">General</a>-->
+    <!--                </li>-->
+    <!--                <li>-->
+    <!--                    <a href="#">Duties</a>-->
+    <!--                </li>-->
+    <!--                <li>-->
+    <!--                    <a href="#">Residential entity</a>-->
+    <!--                </li>-->
+    <!--                <li>-->
+    <!--                    <a href="#">Documents and links</a>-->
+    <!--                </li>-->
+    <!--            </ul>-->
+    <!--            <div class="row properties-box">-->
+    <!--                <div class="col-lg-12">-->
+    <!--                    <p align="center" class="text-danger">TODO.-->
+    <!--                    </p>-->
+    <!--                    <p align="center">TODO-->
+    <!--                        <br>TODO</p>-->
+    <!--                </div>-->
+
+    <!--            </div>-->
+    <!--        </div>-->
+    <!--    </div>-->
+
+    <div class="container">
+        <div class="row properties-box">
+            <div th:each="property: ${userViewModel.getProperties()}" class="section properties">
+                <div class="container">
+                    <div class="row properties-box">
+                        <div th:if="${property.isValidated()}">
+                            <br></br>
+                            <div class="container">
+                                <div class="row properties-box">
+                                    <div class="col-lg-4 col-md-6 align-self-center mb-30 properties-items col-md-6 adv">
+                                        <div class="item">
+                                            <a href="profile.html"><img src="/images/property-plan.jpg" alt=""></a>
+                                            <span class="category">Validated!</span>
+                                            <h4><a th:text="${property.getResidentialEntity().getCity().getName()} + ', ' +
+                            ${property.getResidentialEntity().getStreetName()} + ' ' +
+                            ${property.getResidentialEntity().getStreetNumber()} + ' ' +
+                            ${property.getResidentialEntity().getEntrance()}"></a></h4>
+                                            <ul>
+                                                <li>Property №: <span th:text="${property.getNumber()}"></span></li>
+                                                <li>Floor №: <span th:text="${property.getFloor()}"></span></li>
+                                                <li>Owner: <span
+                                                        th:text="${property.getOwner().firstName} + ' ' + ${property.getOwner().lastName}"></span>
+                                                </li>
+                                            </ul>
+                                            <div align="center" class="main-button">
+                                                <a class="text-light">View details</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div th:unless="${property.isValidated()}">
+                            <br></br>
+                            <div class="container">
+                                <div class="row properties-box">
+                                    <div class="col-lg-4 col-md-6 align-self-center mb-30 properties-items col-md-6 adv">
+                                        <div class="item">
+                                            <a href="profile.html"><img src="/images/property-plan-BW.jpg" alt=""></a>
+                                            <span class="category text-danger">Waiting for validation<!doctype html>
+                                            <html lang="en">
+                                            <head>
+                                            <meta charset="UTF-8">
+                                                         <meta name="viewport"
+                                                               content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+                                                                     <meta http-equiv="X-UA-Compatible"
+                                                                           content="ie=edge">
+                                                         <title>Document</title>
+                                            </head>
+                                            <body>
+                                            
+                                            </body>
+                                            </html></span>
+                                            <h6></h6>
+                                            <h4><a class="text-secondary" th:text="${property.getResidentialEntity().getCity().getName()} + ', ' +
+                            ${property.getResidentialEntity().getStreetName()} + ' ' +
+                            ${property.getResidentialEntity().getStreetNumber()} + ' ' +
+                            ${property.getResidentialEntity().getEntrance()}"></a></h4>
+                                            <ul>
+                                                <li class="text-secondary">Property №: <span class="text-secondary" th:text="${property.getNumber()}"></span></li>
+                                                <li class="text-secondary">Floor №: <span class="text-secondary" th:text="${property.getFloor()}"></span>                                                </li>
+                                                <li class="text-secondary">Owner: <span class="text-secondary" th:text="${property.getOwner().firstName} + ' ' + ${property.getOwner().lastName}"></span></li>
+                                            </ul>
+                                            <div align="center" class="main-button-inactive">
+                                                <a class="text-light">View details</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Footer -->
+<footer th:replace="~{fragments/footer}">
+</footer>
+
+<!-- Scripts -->
+<!-- Bootstrap core JavaScript -->
+<script src="/jquery/jquery.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/isotope.min.js"></script>
+<script src="/js/owl-carousel.js"></script>
+<script src="/js/counter.js"></script>
+<script src="/js/custom.js"></script>
+
+</body>
+</html>

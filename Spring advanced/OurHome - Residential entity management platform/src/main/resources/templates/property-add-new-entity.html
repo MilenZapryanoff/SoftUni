@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang='en'
+      xmlns:th='http://www.thymeleaf.org'
+      xmlns:sec='http://www.thymeleaf.org/extras/spring-security'>
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+          rel="stylesheet">
+
+    <title>OurHome - Home management platform</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="/css/fontawesome.css">
+    <link rel="stylesheet" href="/css/our-home.css">
+    <link rel="stylesheet" href="/css/owl.css">
+    <link rel="stylesheet" href="/css/animate.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
+
+</head>
+
+<body>
+
+<!-- ***** Preloader Start ***** -->
+<div id="js-preloader" class="js-preloader">
+    <div class="preloader-inner">
+        <span class="dot"></span>
+        <div class="dots">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+</div>
+<!-- ***** Preloader End ***** -->
+
+<!-- ***** Header ***** -->
+<div th:replace="~{fragments/header}" class="sub-header">
+</div>
+
+<!-- ***** NavBar ***** -->
+<header class="header-area header-sticky">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav class="main-nav">
+                    <!-- ***** Logo Start ***** -->
+                    <a th:href="@{/}" class="logo">
+                        <h1>OurHome</h1>
+                    </a>
+                    <!-- ***** Logo End ***** -->
+                    <!-- ***** Menu Start ***** -->
+                    <ul class="nav">
+                        <li><a th:href="@{/}">Home</a></li>
+                        <li sec:authorize="isAuthenticated()"><a th:href="@{/messages}">Messages</a></li>
+                        <small sec:authorize="isAuthenticated()" th:with="userId=${userViewModel.getId()}">
+                            <samp th:if="${@messageRepository.countUnreadMessages(userId) > 0}"
+                                  th:with="userId=${userViewModel.getId()}"
+                                  class="timer count-title text-danger"
+                                  th:data-to="${@messageRepository.countUnreadMessages(userId)}"
+                                  data-speed="1000"></samp>
+                        </small>
+                        <li sec:authorize="hasAnyRole('MANAGER','MODERATOR')"><a th:href="@{/administration}"
+                                                                                 class="active">Administration</a>
+                        </li>
+                        <li sec:authorize="hasAnyRole('RESIDENT','MODERATOR')"><a th:href="@{/property}">Your
+                            property</a></li>
+                        <li sec:authorize="isAuthenticated()"><a th:href="@{/profile}">Profile</a></li>
+                        <li><a th:href="@{/contact}">Contact Us</a></li>
+                        <li sec:authorize="!isAuthenticated()"><a th:href="@{/register}">Register</a></li>
+                        <form sec:authorize="isAuthenticated()" id="logout" th:action="@{/logout}" method="POST">
+                            <li><a onclick="logout.submit()" style="cursor: pointer;">Logout</a></li>
+                        </form>
+                        <li sec:authorize="!isAuthenticated()"><a th:href="@{/login}">Login</a></li>
+                    </ul>
+                    <a class='menu-trigger'>
+                        <span>Menu</span>
+                    </a>
+                    <!-- ***** Menu End ***** -->
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<!--Single property BANNER-->
+<div class="page-heading header-text">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="row">
+                    <div class="column-gap-2">
+                    </div>
+                </div>
+                <h3>
+                    Register now
+                </h3>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+
+<div align="center" class="input-content">
+    <div class="col-lg-4">
+        <form id="input-form"
+              th:method="POST"
+              th:action="@{/property/add/new}"
+              th:object="${userAuthRegisterBindingModel}">
+            <div class="col-lg-12">
+                <small th:if="${badResidentialEntity}" class="text-danger">Wrong residential entity ID or Access
+                    code!<br></br></small>
+                <fieldset>
+                    <br>
+                    <label for="residentialId"><b>Residential Entity ID</b></label>
+                    <br>
+                    <small th:if="${#fields.hasErrors('residentialId')}"
+                           th:errors="*{residentialId}" class="text-danger">Residential entity ID error message</small>
+                    <input type="text" id="residentialId" placeholder="Enter Residential entity ID..." required
+                           th:field="*{residentialId}"
+                           th:errorclass="bg-danger">
+                </fieldset>
+                <fieldset>
+                    <label for="residentialAccessCode"><b>Residential entity Access code</b></label>
+                    <br>
+                    <small th:if="${#fields.hasErrors('residentialAccessCode')}"
+                           th:errors="*{residentialAccessCode}" class="text-danger">Access code error message</small>
+                    <input type="password" id="residentialAccessCode" placeholder="Enter Access code..." required
+                           th:field="*{residentialAccessCode}"
+                           th:errorclass="bg-danger">
+                </fieldset>
+                <fieldset>
+                    <button th:href="@{/property/add/new}" type="submit" id="form-submit" class="orange-button">Add
+                    </button>
+                    <button class="orange-button" id="form-cancel"><a
+                            th:href="@{/property/add}">
+                        <h7 class="text-light">Back</h7>
+                    </a>
+                    </button>
+                </fieldset>
+            </div>
+        </form>
+    </div>
+
+
+</div>
+
+<!-- Footer -->
+<footer th:replace="~{fragments/footer}">
+</footer>
+
+<!-- Scripts -->
+<!-- Bootstrap core JavaScript -->
+<script src="/jquery/jquery.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/isotope.min.js"></script>
+<script src="/js/owl-carousel.js"></script>
+<script src="/js/counter.js"></script>
+<script src="/js/custom.js"></script>
+
+</div>
+</body>
+</html>
