@@ -15,7 +15,7 @@ The program contains the following modules :
   + Spring Data - [certificate](https://softuni.bg/certificates/details/180573/80c84453)
 - Java Web
   + Spring Fundamentals - [certificate](https://softuni.bg/certificates/details/191553/6461ca2c)
-  + Spring Advanced - ongoing course
+  + Spring Advanced - [certificate](https://softuni.bg/certificates/details/197693/eff6a443)
 - JS Front-end
   + JS Front-end
   + HTML & CSS
