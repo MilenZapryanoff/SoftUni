@@ -1,0 +1,58 @@
+body {
+    font-family: Helvetica, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    margin-left: 70px;
+    margin-right: 70px;
+}
+
+
+header h1, h2, h3, h4, h5, h6 {
+    font-family: Georgia, serif;
+    font-weight: lighter;
+}
+
+ul {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+blockquote {
+    border-left: solid;
+    border-left-color: rgb(221,221,221);
+    font-style: italic;
+}
+
+blockquote p {
+    text-align: right;
+    padding-top: 10px;
+    padding-bottom: 30px;
+}
+
+dd {
+    padding-top: 10px;
+    padding-bottom: 10x;
+}
+
+hr {
+    color: gainsboro;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    text-align: left;
+    border: 1px solid #dddddd;
+    padding: 6px;
+}
+
+th {
+    background-color: #dddddd;
+  }
+
+tr:nth-child(even) {
+    background-color: #f1f1f1;
+}
