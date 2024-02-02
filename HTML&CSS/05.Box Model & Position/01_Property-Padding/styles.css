@@ -1,0 +1,19 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  margin: 1em;
+}
+
+p {
+  padding: 30px 40px 50px 20px;
+  font-weight: bold;
+  background-color: coral;
+}
+
+.container {
+  padding: 3px;
+  border: 1px solid;
+}
