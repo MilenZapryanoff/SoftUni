@@ -1,0 +1,32 @@
+body {
+    padding: 1em 2em;
+    line-height: 1.5;
+    font-family: Helvetica, sans-serif;
+    background-color: rgb(238, 238, 238);
+    color: rgb(51, 51, 51);
+}
+
+h1, h2 {
+    font-family:   Georgia, 'Times New Roman', Times, serif
+}
+
+section h2 {
+    padding-top: 1em;
+}
+
+img {
+    width: 50%;
+}
+
+article, aside {
+    display: inline-block;
+}
+
+article {
+    width: 65%;
+}
+
+aside {
+    position: absolute;
+    width: 25%;
+}
