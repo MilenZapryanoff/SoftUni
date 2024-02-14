@@ -1,0 +1,44 @@
+body {
+    background-color: rgb(238, 238, 238);
+}
+
+img {
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+}
+
+a {
+    background-color: rgb(3, 165, 3);
+    color: #fff;
+    text-decoration: none;
+    padding: 0.6em 1.2em;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    position: absolute;
+    right: 30px;
+    bottom: 15px;
+}
+
+a:hover {
+    background-color: rgb(3, 104, 3);
+}
+
+.card {
+    background-color: rgb(255, 255, 255);
+    width: min-content;
+    border-radius: 7px;
+    box-shadow: 0px 0px 20px 8px darkgray;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.heading {
+    padding: 0em 2em;
+    font-family: Georgia, serif;
+    line-height: 1.2;
+    font-size: 1em;
+    position: relative;
+    padding-bottom: 4em;
+    }
