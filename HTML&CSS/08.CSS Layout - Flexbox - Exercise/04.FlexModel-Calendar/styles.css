@@ -1,0 +1,57 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    padding: 1em;
+    min-width: 65vw;
+    display: flex;
+    justify-content: center;
+}
+
+section {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+span {
+    border: 1px solid black;
+}
+
+.title {
+    padding-top: 1em;
+    text-align: center;
+    height: 100px;
+    width: 100%;
+}
+
+.workday {
+    padding-top: 1em;
+    width: 20%;
+    text-align: center;
+    height: 100px;
+    overflow-x: auto;
+}
+
+.weekend {
+    padding-top: 1em;
+    width: 50%;
+    text-align: center;
+    height: 100px;
+    
+}
+
+.notes {
+    flex-direction: column;
+}
+
+.notes span {
+    padding-top: 0.5em;
+    text-align: center;
+    min-height: 200px;
+    width: 150px;
+}
+
