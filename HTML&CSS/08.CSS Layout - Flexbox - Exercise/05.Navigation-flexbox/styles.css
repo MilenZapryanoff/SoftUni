@@ -1,0 +1,60 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    padding: 3em;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+}
+
+header {
+    border-bottom: 2px solid black;
+    justify-content: space-between;
+    display: flex;
+    padding-bottom: 1em;
+}
+header > h1 {
+    text-transform: uppercase;
+}
+
+main > h2 {
+    padding-top: 1em;
+    padding-bottom: 0.5em;
+    font-family: Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-weight: 500;
+}
+
+ul {
+    margin-top: 0.5em;
+    list-style-type: none;
+}
+
+ul > li {
+    border: 1px solid transparent;
+    display:inline;
+    padding-left: 1em;
+    padding-right: 1em;
+}
+
+ul > li:hover {
+    border: 1px solid green;
+    border-radius: 50px;
+    background-color: green;
+}
+
+a {
+    text-decoration: none;
+    color: green;
+}
+
+a:hover {
+    text-decoration: none;
+    color: white;
+}
+
+p {
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+}
