@@ -1,0 +1,227 @@
+@import url('https://fonts.googleapis.com/css2?family=Karla&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Infant&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font: 18px/1.2 "Karla", sans-serif;
+}
+
+body {
+    background-image: url('images/poster.jpg');
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: top center;
+    
+}
+
+h1, h2, h3 {
+    font-family: "Cormorant Infant";
+}
+
+.site-section {
+    padding: 2em;
+}
+
+.site-section.customer-review,
+.site-section.article {
+    background-color: #F8F0E9;
+}
+
+.site-section.support,
+.site-section.find-guide {
+    background-color: #E14747;
+}
+
+
+/* CONTAINERS */
+
+.container {
+    max-width: 1150px;
+    margin: 0 auto;
+}
+
+/* HEADER */
+
+.site-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.site-header nav ul {
+    gap: 1.5em;
+    display: flex;
+}
+
+.site-header nav li {
+    list-style: none outside;
+    padding: 0 0.5em;
+}
+
+.site-header nav a {
+    text-decoration: none;
+    color: #fff;
+}
+
+.site-title a {
+    display: block;
+    width: 130px;
+    height: 50px;
+    overflow: hidden;
+    text-indent: -200vw;
+    background-image: url('images/logo.webp');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.site-section.banner .container,
+.site-section.support .container {
+    color: #FFF;
+}
+
+/* BANNER SECTION */
+
+.site-section.banner h2 {
+    padding-top: 0.7em;
+    text-align: center;
+    display: block;
+    font-size: 90px;
+    font-weight: bold;
+    line-height: 1.26;
+}
+
+.site-section.banner p {
+    padding: 6em 0;
+    text-align: center;
+}
+
+/* CUSTOMER-REVIEW SECTION */
+
+.site-section.customer-review .container {
+    padding: 0 5.5em;  
+}
+
+.site-section.customer-review h3 {
+    padding-top: 1em;
+    padding-bottom: 1.5em;
+    font: 3.5em/1 "Cormorant Infant", serif;
+    font-weight: bold;
+    font-style: italic;
+}
+
+
+/* SUPPORT SECTION */
+
+.site-section.support .container {
+    width: 15%;
+    text-align: center;
+}
+
+.site-section.support h4 {
+    padding-top: 1em;
+    padding-bottom: 1.5em;
+    font-size: 1.66em;
+}
+
+.site-section.support p {
+    padding-bottom: 1.5em;
+}
+
+
+/* ARTICLE SECTION */
+
+.site-section.article .container {
+    max-width: 625px;
+    text-align: center;
+}
+
+.site-section.article .container img {
+    width: 100%;
+}
+
+.site-section.article .container h3 {
+    padding: 1em 0;
+    font-size: 4.22em;
+}
+
+.site-section.article .container p {
+    padding-bottom: 2em;   
+}
+
+.site-section.article .button {
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 4px;
+    text-decoration: none;
+    padding: 0.5em;
+}
+
+.site-section.article .read-more-button {
+    padding-top: 2em;
+    padding-bottom: 1em;
+    width: fit-content;
+}
+
+.site-section.article  .read-all-button {
+    margin: 3em auto;
+}
+
+
+/* FIND-GUIDE SECTION */
+
+.site-section.find-guide .container {
+    width: 80%;
+    color: white;
+    text-align: center;
+}
+
+.site-section.find-guide .container h3 {
+    padding: 1em 0;
+    font-size: 4.22em;
+}
+
+.site-section.find-guide .container p {
+    padding-bottom: 4em;   
+}
+
+
+.site-section.find-guide .container .find-guide-button {
+    width: fit-content;
+    display: inline-block;
+    padding: 1em;
+    background-color: #FAD87A;  
+    border-radius: 27px;
+    text-decoration: none;
+    margin-bottom: 2.5em;
+}
+
+
+/* FOOTER */
+
+footer {
+    padding: 2em 5em;
+    background-color: #352B2A;
+}
+
+footer img {
+    padding: 1em 0;
+    width: 100px;
+    height: auto;
+}
+
+footer p {
+    padding: 1em 0;
+}
+
+footer p:nth-child(2) {    
+    color: white;
+}
+
+footer p:nth-child(3) {
+    color: gray;
+}
