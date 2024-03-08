@@ -1,0 +1,64 @@
+@media (width <= 600px) {
+        
+    header nav {
+        margin-left: 0;
+        justify-content: center;
+    }
+    
+    header nav ul {
+        display: flex;
+        flex-direction: column;
+        gap: 0.2em;
+    }
+    
+    header nav ul li {
+        text-align: center;
+    }
+    
+    header nav ul li a {
+        font-size: 14px;
+    }
+    
+    .header-title {
+        padding: 1em 0;
+    }
+    
+    .header-title h1 {
+        font-size: 36px;
+    }
+    
+    .header-title p {
+
+        font-size: 18px;
+    }
+
+    .choose-us ul {
+        flex-direction: column;
+        flex: 1 0 auto;
+        flex-wrap: wrap;
+    }
+
+       .choose-us ul li p {
+      padding-left: 8em;
+      padding-right: 5em;
+      padding-bottom: 2em;
+    } 
+      
+    .team-description ul li {
+        flex: 0 1 40%;
+    }
+    
+    .team-description ul li img {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+    
+    footer p {
+        padding: 0.4em 0;
+      }
+    
+    
+    
+    
+}
