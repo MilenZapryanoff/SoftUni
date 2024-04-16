@@ -18,5 +18,5 @@ The program contains the following modules :
   + Spring Advanced - [certificate](https://softuni.bg/certificates/details/197693/eff6a443)
 - JS Front-end
   + HTML & CSS - [certificate](https://softuni.bg/certificates/details/205362/a333f09f)
-  + JS Front-end - ongoing course
+  + JS Front-end - [certificate](https://softuni.bg/certificates/details/212421/4bad96be)
   
