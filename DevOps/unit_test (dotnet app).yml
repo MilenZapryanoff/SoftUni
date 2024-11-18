@@ -1,0 +1,31 @@
+name: Build and run Unit tests
+
+on:
+  push:
+    branches: [ "develop" ]
+#  pull_request:
+#    branches: [ "main" ]
+
+jobs:
+  build_unit_tests:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout the repository
+      uses: actions/checkout@v4
+    - name: Setup .NET version 6
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 6.0.x
+    - name: Restore dependencies
+      run: dotnet restore
+    - name: Build
+      run: dotnet build --no-restore
+
+    #If all tests have to be ran 
+    #- name: Execute All tests
+    #  run: dotnet test --no-build --verbosity normal
+
+    - name: Execute Unit tests
+      run: dotnet test HouseRentingSystem.UnitTests/HouseRentingSystem.UnitTests.csproj --no-build --verbosity normal
