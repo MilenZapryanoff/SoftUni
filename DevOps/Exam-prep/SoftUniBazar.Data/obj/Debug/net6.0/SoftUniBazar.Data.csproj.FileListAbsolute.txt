@@ -1,0 +1,15 @@
+/Users/milenzapryanov/Desktop/SEDO-Regular-Exam-2024-10-27/SoftUniBazar.Data/bin/Debug/net6.0/SoftUniBazar.Data.deps.json
+/Users/milenzapryanov/Desktop/SEDO-Regular-Exam-2024-10-27/SoftUniBazar.Data/bin/Debug/net6.0/SoftUniBazar.Data.runtimeconfig.json
+/Users/milenzapryanov/Desktop/SEDO-Regular-Exam-2024-10-27/SoftUniBazar.Data/bin/Debug/net6.0/SoftUniBazar.Data.dll
+/Users/milenzapryanov/Desktop/SEDO-Regular-Exam-2024-10-27/SoftUniBazar.Data/bin/Debug/net6.0/SoftUniBazar.Data.pdb
+/Users/milenzapryanov/Desktop/SEDO-Regular-Exam-2024-10-27/SoftUniBazar.Data/obj/Debug/net6.0/SoftUniBazar.Data.csproj.AssemblyReference.cache
+/Users/milenzapryanov/Desktop/SEDO-Regular-Exam-2024-10-27/SoftUniBazar.Data/obj/Debug/net6.0/SoftUniBazar.Data.GeneratedMSBuildEditorConfig.editorconfig
+/Users/milenzapryanov/Desktop/SEDO-Regular-Exam-2024-10-27/SoftUniBazar.Data/obj/Debug/net6.0/SoftUniBazar.Data.AssemblyInfoInputs.cache
+/Users/milenzapryanov/Desktop/SEDO-Regular-Exam-2024-10-27/SoftUniBazar.Data/obj/Debug/net6.0/SoftUniBazar.Data.AssemblyInfo.cs
+/Users/milenzapryanov/Desktop/SEDO-Regular-Exam-2024-10-27/SoftUniBazar.Data/obj/Debug/net6.0/SoftUniBazar.Data.csproj.CoreCompileInputs.cache
+/Users/milenzapryanov/Desktop/SEDO-Regular-Exam-2024-10-27/SoftUniBazar.Data/obj/Debug/net6.0/SoftUniBazar.Data.sourcelink.json
+/Users/milenzapryanov/Desktop/SEDO-Regular-Exam-2024-10-27/SoftUniBazar.Data/obj/Debug/net6.0/SoftUniBazar.Data.dll
+/Users/milenzapryanov/Desktop/SEDO-Regular-Exam-2024-10-27/SoftUniBazar.Data/obj/Debug/net6.0/refint/SoftUniBazar.Data.dll
+/Users/milenzapryanov/Desktop/SEDO-Regular-Exam-2024-10-27/SoftUniBazar.Data/obj/Debug/net6.0/SoftUniBazar.Data.pdb
+/Users/milenzapryanov/Desktop/SEDO-Regular-Exam-2024-10-27/SoftUniBazar.Data/obj/Debug/net6.0/SoftUniBazar.Data.genruntimeconfig.cache
+/Users/milenzapryanov/Desktop/SEDO-Regular-Exam-2024-10-27/SoftUniBazar.Data/obj/Debug/net6.0/ref/SoftUniBazar.Data.dll
