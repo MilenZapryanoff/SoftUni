@@ -21,5 +21,5 @@ The program contains the following modules :
   + JS Front-end - [certificate](https://softuni.bg/certificates/details/212421/4bad96be)
 - DevOps for Developers
   + Software Engineering and DevOps - [certificate](https://softuni.bg/certificates/details/229493/33d3fd1b)
-  + Containers and Cloud
+  + Containers and Cloud - [certificate](https://softuni.bg/certificates/details/232880/bb503a53)
  
